@@ -1,6 +1,7 @@
 package org.mercury.EmployeeService.bean;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +18,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "EMPLOYEE")
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Employee {
     @Id
     @SequenceGenerator(name = "employee_seq_gen", sequenceName = "EMPLOYEE_EMPLOYEE_ID_SEQ", allocationSize = 1)
@@ -30,9 +31,13 @@ public class Employee {
     @Column
     private String employeeEmail;
     @Column
+    private String employeeLocationCountry;
+    @Column
+    private String employeeLocationCity;
+    @Column
     private String employeePhone;
     @Column
-    private String departmentId;
+    private Integer departmentId;
     @Column
     private Date employeeBirthday;
     @Column

@@ -17,4 +17,16 @@
   ```
 - Null value was assigned to a property of primitive type setter
   - use Integer instead of int
-  
+## Database Service
+- customized filter with key, operation, value
+  - JPA Specification
+    - xxxSpecification implements Specification
+    - xxxDao implements JpaSpecificationExecutor
+    - SearchCriteria
+  - multiple conditions
+    - first where, following and, lastly findAll
+  - cannot parse date
+    - if getValue() is string, parse date: 
+      SimpleDateFormat dateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+    dateFormat.parse(dateStr);
+    - if getValue() is Date, just (Date)getValue()
