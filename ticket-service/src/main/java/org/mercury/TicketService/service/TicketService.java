@@ -1,7 +1,9 @@
 package org.mercury.TicketService.service;
 
 import org.mercury.TicketService.bean.Ticket;
+import org.mercury.TicketService.bean.TicketAssign;
 import org.mercury.TicketService.criteria.SearchCriteria;
+import org.mercury.TicketService.dao.TicketAssignDao;
 import org.mercury.TicketService.dao.TicketDao;
 import org.mercury.TicketService.filter.TicketFilter;
 import org.mercury.TicketService.http.Response;
@@ -9,11 +11,11 @@ import org.mercury.TicketService.specification.TicketSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @ClassName TicketService
@@ -28,6 +30,9 @@ public class TicketService {
     @Autowired
     private TicketDao ticketDao;
 
+    @Autowired
+    private TicketAssignDao ticketAssignDao;
+
     public Ticket getById(int id){
         Optional<Ticket> optionalTicket = ticketDao.findById(id);
         return optionalTicket.orElse(null);
@@ -36,9 +41,24 @@ public class TicketService {
     public List<Ticket> getByEmployeeId(int id){
         return ticketDao.findByTicketCreator(id);
     }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     public Response addTicket(Ticket ticket){
-        ticketDao.save(ticket);
-        return new Response(true);
+        try{
+            List<TicketAssign> assignRoles = ticket.getAssigns();
+            assignRoles.forEach((ticketAssign -> {
+                ticketAssign.setTicket(ticket);
+                // employeeId and role are already set
+            }));
+
+            ticketDao.save(ticket);
+            return new Response(true);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new Response(false);
+        }
+
+
     }
 
     public List<Ticket> getWithFilter(TicketFilter ticketFilter){

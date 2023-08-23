@@ -4,18 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added api for employee filter">
-      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/TicketServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/Ticket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/controller/TicketController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/criteria/SearchCriteria.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dao/TicketDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/filter/TicketFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/http/Response.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/specification/TicketSpecification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/resources/application.properties" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added api for ticket">
+      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dao/TicketAssignDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErrorLog.md" beforeDir="false" afterPath="$PROJECT_DIR$/ErrorLog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/TicketAssign.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/TicketAssign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +62,7 @@
       <recent name="$PROJECT_DIR$/employee-service/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.mercury.TicketService.dao" />
       <recent name="org.mercury.TicketService.http" />
       <recent name="org.mercury.TicketService.criteria" />
     </key>
@@ -85,7 +81,7 @@
       <option name="presentableId" value="Default" />
       <updated>1692245593711</updated>
       <workItem from="1692297947471" duration="12901000" />
-      <workItem from="1692451853541" duration="21945000" />
+      <workItem from="1692451853541" duration="33392000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -108,7 +104,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692589466827</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added api for ticket">
+      <created>1692741763722</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1692741763722</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,6 +132,7 @@
     <MESSAGE value="added child projects" />
     <MESSAGE value="added employee getall pipeline" />
     <MESSAGE value="added api for employee filter" />
-    <option name="LAST_COMMIT_MESSAGE" value="added api for employee filter" />
+    <MESSAGE value="added api for ticket" />
+    <option name="LAST_COMMIT_MESSAGE" value="added api for ticket" />
   </component>
 </project>

@@ -30,3 +30,9 @@
       SimpleDateFormat dateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
     dateFormat.parse(dateStr);
     - if getValue() is Date, just (Date)getValue()
+
+## MVC
+- Ticket and TicketAssign(contains ticket, and other fields, many-to-one relationship with Ticket), when save a ticket and its multiple TicketAssigns
+  - Q: do I need to separately save for ticketAssign?
+    - Q: if not, how to send request (yes, send as list of TicketAssign)
+    - Q: if yes, how to save ('mappedBy' a property named 'ticketId' which does not exist in the target entity 'org.mercury.TicketService.bean.TicketAssign')

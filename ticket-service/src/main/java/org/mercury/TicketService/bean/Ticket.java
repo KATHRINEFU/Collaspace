@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName Ticket
@@ -36,4 +37,7 @@ public class Ticket {
     private String ticketDescription;
     @Column
     private String ticketStatus;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "ticket")
+    private List<TicketAssign> assigns;
 }
