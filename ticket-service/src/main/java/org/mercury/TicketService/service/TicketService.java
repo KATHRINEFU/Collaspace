@@ -2,6 +2,7 @@ package org.mercury.TicketService.service;
 
 import org.mercury.TicketService.bean.Ticket;
 import org.mercury.TicketService.bean.TicketAssign;
+import org.mercury.TicketService.bean.TicketLog;
 import org.mercury.TicketService.criteria.SearchCriteria;
 import org.mercury.TicketService.dao.TicketAssignDao;
 import org.mercury.TicketService.dao.TicketDao;
@@ -50,6 +51,12 @@ public class TicketService {
                 ticketAssign.setTicket(ticket);
                 // employeeId and role are already set
             }));
+
+            // ticketlogs is null when passed in
+            // is a log for creation necessary?
+            List<TicketLog> logs = new ArrayList<>();
+            logs.add(new TicketLog(ticket, ticket.getTicketCreator(), new Date(), "Ticket Created"));
+            ticket.setTicketLogs(logs);
 
             ticketDao.save(ticket);
             return new Response(true);

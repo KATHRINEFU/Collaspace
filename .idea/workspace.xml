@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added api for ticket">
-      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dao/TicketAssignDao.java" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added api for ticket assign">
+      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/TicketLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/controller/TicketLogController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dao/TicketLogDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dto/TicketLogDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/requestObjects/TicketLogCreateRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketLogService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErrorLog.md" beforeDir="false" afterPath="$PROJECT_DIR$/ErrorLog.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/TicketAssign.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/TicketAssign.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +85,7 @@
       <option name="presentableId" value="Default" />
       <updated>1692245593711</updated>
       <workItem from="1692297947471" duration="12901000" />
-      <workItem from="1692451853541" duration="33392000" />
+      <workItem from="1692451853541" duration="46106000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -111,7 +115,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692741763722</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added api for ticket assign">
+      <created>1692801557961</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1692801557961</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +144,7 @@
     <MESSAGE value="added employee getall pipeline" />
     <MESSAGE value="added api for employee filter" />
     <MESSAGE value="added api for ticket" />
-    <option name="LAST_COMMIT_MESSAGE" value="added api for ticket" />
+    <MESSAGE value="added api for ticket assign" />
+    <option name="LAST_COMMIT_MESSAGE" value="added api for ticket assign" />
   </component>
 </project>

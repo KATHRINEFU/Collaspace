@@ -40,4 +40,7 @@ public class Ticket {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "ticket")
     private List<TicketAssign> assigns;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "ticket")
+    private List<TicketLog> ticketLogs;
 }
