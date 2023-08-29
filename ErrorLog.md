@@ -64,3 +64,5 @@
 
 - When I need to add row in the relationship bean (TicketLog), which contains (Ticket) how can I pass through request?
   - create a new class for 'TicketLogCreateRequest' with only needed fields
+- In Specification class: Could not resolve attribute 'eventCreationdateStart' of 'org.mercury.EventService.bean.Event'
+  - Key in SearchCriteria should be 'eventCreationdate'
