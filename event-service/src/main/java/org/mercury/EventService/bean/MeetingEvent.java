@@ -23,10 +23,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MeetingEvent extends Event{
-    @Column
-    @SequenceGenerator(name = "meeting_event_seq_gen", sequenceName = "MEETING_EVENT_MEETING_EVENT_ID_SEQ", allocationSize = 1)
-    @GeneratedValue(generator="meeting_event_seq_gen", strategy = GenerationType.AUTO)
-    private int meetingEventId;
 
     @Column
     private boolean meetingVirtual;

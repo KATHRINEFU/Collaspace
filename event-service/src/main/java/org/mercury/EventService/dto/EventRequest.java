@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName EventRequest
@@ -26,6 +27,9 @@ public class EventRequest {
     private String eventTitle;
     private String eventDescription;
     private boolean eventExpired;
+
+    // collaboration
+    private List<EventCollaborationRequest> collaborations;
 
     // document event specific
     private String documentLink;

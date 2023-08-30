@@ -3,12 +3,16 @@ package org.mercury.EventService.service;
 import org.mercury.EventService.bean.*;
 import org.mercury.EventService.criteria.SearchCriteria;
 import org.mercury.EventService.dao.*;
+import org.mercury.EventService.dto.EventCollaborationRequest;
 import org.mercury.EventService.dto.EventRequest;
 import org.mercury.EventService.filter.EventFilter;
 import org.mercury.EventService.specification.EventSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,6 +44,9 @@ public class EventService {
     @Autowired
     private TeamDao teamDao;
 
+    @Autowired
+    private EventCollaborationDao eventCollaborationDao;
+
     public Event getById(int id){
         return eventDao.findById(id).orElse(null);
     }
@@ -53,7 +60,8 @@ public class EventService {
     }
 
 
-    public Event addEvent(EventRequest eventRequest) {
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+    public Event addEvent(EventRequest eventRequest) throws IllegalArgumentException {
         Event event = null;
 
         switch (eventRequest.getEventType().toLowerCase()) {
@@ -105,7 +113,30 @@ public class EventService {
             activityEventDao.save(activityEvent);
         }
 
-        return eventDao.save(event);
+        Event savedEvent = eventDao.save(event);
+
+        List<EventCollaborationRequest> collaborationRequests = eventRequest.getCollaborations();
+        if (collaborationRequests != null && !collaborationRequests.isEmpty()) {
+            for (EventCollaborationRequest collaborationRequest : collaborationRequests) {
+                Optional<Team> invitedTeamOptional = teamDao.findById(collaborationRequest.getTeamId());
+                if (invitedTeamOptional.isPresent()) {
+                    Team invitedTeam = invitedTeamOptional.get();
+
+                    EventCollaboration eventCollaboration = new EventCollaboration();
+                    eventCollaboration.setEvent(savedEvent);
+                    eventCollaboration.setTeam(invitedTeam);
+                    eventCollaboration.setInvitedate(new Date());
+                    eventCollaboration.setAcceptStatus(false); // Initial status
+                    eventCollaboration.setTeamRole(collaborationRequest.getTeamRole());
+
+                    eventCollaborationDao.save(eventCollaboration);
+                } else {
+                    throw new IllegalArgumentException("Collaboration Team id "+ collaborationRequest.getTeamId() + " not found");
+                }
+            }
+        }
+
+        return savedEvent;
     }
 
     public Event editEvent(int id, EventRequest editRequest) {

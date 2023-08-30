@@ -23,10 +23,10 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ActivityEvent extends Event{
-    @Column
-    @SequenceGenerator(name = "meeting_event_seq_gen", sequenceName = "MEETING_EVENT_MEETING_EVENT_ID_SEQ", allocationSize = 1)
-    @GeneratedValue(generator="meeting_event_seq_gen", strategy = GenerationType.AUTO)
-    private int activityEventId;
+//    @Column
+//    @SequenceGenerator(name = "activity_event_seq_gen", sequenceName = "ACTIVITY_EVENT_ACTIVITY_EVENT_ID_SEQ", allocationSize = 1)
+//    @GeneratedValue(generator="activity_event_seq_gen", strategy = GenerationType.AUTO)
+//    private int activityEventId;
 
     @Column
     private boolean activityVirtual;

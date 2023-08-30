@@ -22,10 +22,10 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DocumentEvent extends Event {
-    @Column
-    @SequenceGenerator(name = "document_event_seq_gen", sequenceName = "DOCUMENT_EVENT_DOCUMENT_EVENT_ID_SEQ", allocationSize = 1)
-    @GeneratedValue(generator="document_event_seq_gen", strategy = GenerationType.AUTO)
-    private int documentEventId;
+//    @Column
+//    @SequenceGenerator(name = "document_event_seq_gen", sequenceName = "DOCUMENT_EVENT_DOCUMENT_EVENT_ID_SEQ", allocationSize = 1)
+//    @GeneratedValue(generator="document_event_seq_gen", strategy = GenerationType.AUTO)
+//    private int documentEventId;
 
     @Column
     private String documentLink;
