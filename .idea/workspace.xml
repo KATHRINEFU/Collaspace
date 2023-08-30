@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added api for event">
-      <change afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/bean/EventCollaboration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/dao/EventCollaborationDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/dto/EventCollaborationRequest.java" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added api for adding event collaboration">
+      <change afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/controller/EventCollaborationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/service/EventCollaborationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/bean/ActivityEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/bean/ActivityEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/bean/DocumentEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/bean/DocumentEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/bean/MeetingEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/bean/MeetingEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/dto/EventRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/dto/EventRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/service/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/service/EventService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +83,7 @@
       <updated>1692245593711</updated>
       <workItem from="1692297947471" duration="12901000" />
       <workItem from="1692451853541" duration="51422000" />
-      <workItem from="1693177253598" duration="29180000" />
+      <workItem from="1693177253598" duration="31098000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -140,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693286726849</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="added api for adding event collaboration">
+      <created>1693359860931</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1693359860931</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,6 +166,7 @@
     <MESSAGE value="added api for ticket assign" />
     <MESSAGE value="added api for ticket log, added DTO and Request Objects" />
     <MESSAGE value="added api for event" />
-    <option name="LAST_COMMIT_MESSAGE" value="added api for event" />
+    <MESSAGE value="added api for adding event collaboration" />
+    <option name="LAST_COMMIT_MESSAGE" value="added api for adding event collaboration" />
   </component>
 </project>
