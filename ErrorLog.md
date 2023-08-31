@@ -66,3 +66,5 @@
   - create a new class for 'TicketLogCreateRequest' with only needed fields
 - In Specification class: Could not resolve attribute 'eventCreationdateStart' of 'org.mercury.EventService.bean.Event'
   - Key in SearchCriteria should be 'eventCreationdate'
+- table id keeps saying duplicate
+  - remove subclass's id field
