@@ -1,6 +1,7 @@
 package org.mercury.EmployeeService.service;
 
 import org.mercury.EmployeeService.bean.Employee;
+import org.mercury.EmployeeService.bean.Ticket;
 import org.mercury.EmployeeService.criteria.SearchCriteria;
 import org.mercury.EmployeeService.dao.EmployeeDao;
 import org.mercury.EmployeeService.filter.EmployeeFilter;
@@ -9,12 +10,12 @@ import org.mercury.EmployeeService.specification.EmployeeSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * @ClassName EmployeeService
@@ -28,6 +29,9 @@ import java.util.stream.Collectors;
 public class EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
+
+    @Autowired
+    private WebClient webClient;
 
     public List<Employee> getAll(){
         return employeeDao.findAll();

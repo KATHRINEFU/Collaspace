@@ -4,21 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added api for getting and editing event collaboration">
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/TeamServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/bean/Announcement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/bean/Team.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/AnnouncementController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/TeamController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dao/AnnouncementDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dao/TeamDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/AnnouncementRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/TeamRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/AnnouncementService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/TeamService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/resources/application.properties" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added api for team announcement">
+      <change afterPath="$PROJECT_DIR$/client-account-service/src/main/java/org/mercury/ClientAccountService/ClientAccountServiceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-account-service/src/main/java/org/mercury/ClientAccountService/bean/Company.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-account-service/src/main/java/org/mercury/ClientAccountService/controller/CompanyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-account-service/src/main/java/org/mercury/ClientAccountService/dao/CompanyDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-account-service/src/main/java/org/mercury/ClientAccountService/dto/CompanyRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-account-service/src/main/java/org/mercury/ClientAccountService/service/CompanyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-account-service/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Ticket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/config/WebClientConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErrorLog.md" beforeDir="false" afterPath="$PROJECT_DIR$/ErrorLog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/AnnouncementRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/AnnouncementRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +58,7 @@
     "WebServerToolWindowFactoryState": "false",
     "extract.method.default.visibility": "private",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "/Users/katefu/Jobs/mercury/project/collaspace-parent/team-service/src/main/resources",
+    "last_opened_file_path": "/Users/katefu/Jobs/mercury/project/collaspace-parent/client-account-service/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -67,17 +68,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client-account-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/team-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/event-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/ticket-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/employee-service/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.mercury.ClientAccountService" />
       <recent name="org.mercury.TeamService" />
       <recent name="org.mercury.EventService.bean" />
       <recent name="org.mercury.EventService.criteria" />
       <recent name="org.mercury.TicketService.dao" />
-      <recent name="org.mercury.TicketService.http" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -95,7 +97,7 @@
       <updated>1692245593711</updated>
       <workItem from="1692297947471" duration="12901000" />
       <workItem from="1692451853541" duration="51422000" />
-      <workItem from="1693177253598" duration="41268000" />
+      <workItem from="1693177253598" duration="47695000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -160,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693365384360</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="added api for team announcement">
+      <created>1693454645103</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1693454645103</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,6 +196,7 @@
     <MESSAGE value="added api for event" />
     <MESSAGE value="added api for adding event collaboration" />
     <MESSAGE value="added api for getting and editing event collaboration" />
-    <option name="LAST_COMMIT_MESSAGE" value="added api for getting and editing event collaboration" />
+    <MESSAGE value="added api for team announcement" />
+    <option name="LAST_COMMIT_MESSAGE" value="added api for team announcement" />
   </component>
 </project>
