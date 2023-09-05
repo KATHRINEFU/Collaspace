@@ -1,8 +1,8 @@
-package org.mercury.ClientAccountService.service;
+package org.mercury.ClientService.service;
 
-import org.mercury.ClientAccountService.bean.Company;
-import org.mercury.ClientAccountService.dao.CompanyDao;
-import org.mercury.ClientAccountService.dto.CompanyRequest;
+import org.mercury.ClientService.bean.Company;
+import org.mercury.ClientService.dao.CompanyDao;
+import org.mercury.ClientService.dto.CompanyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;

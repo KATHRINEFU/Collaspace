@@ -1,7 +1,7 @@
-package org.mercury.ClientAccountService.dao;
+package org.mercury.ClientService.dao;
 
-import org.mercury.ClientAccountService.bean.Company;
-import org.mercury.ClientAccountService.bean.Contact;
+import org.mercury.ClientService.bean.Company;
+import org.mercury.ClientService.bean.Contact;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

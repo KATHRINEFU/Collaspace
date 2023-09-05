@@ -1,8 +1,8 @@
-package org.mercury.ClientAccountService.controller;
+package org.mercury.ClientService.controller;
 
-import org.mercury.ClientAccountService.bean.Company;
-import org.mercury.ClientAccountService.dto.CompanyRequest;
-import org.mercury.ClientAccountService.service.CompanyService;
+import org.mercury.ClientService.bean.Company;
+import org.mercury.ClientService.dto.CompanyRequest;
+import org.mercury.ClientService.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

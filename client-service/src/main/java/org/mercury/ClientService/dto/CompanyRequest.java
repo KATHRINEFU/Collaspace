@@ -1,4 +1,4 @@
-package org.mercury.ClientAccountService.dto;
+package org.mercury.ClientService.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package org.mercury.ClientAccountService.bean;
+package org.mercury.ClientService.bean;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

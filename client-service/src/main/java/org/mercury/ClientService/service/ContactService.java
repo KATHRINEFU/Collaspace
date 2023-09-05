@@ -1,9 +1,9 @@
-package org.mercury.ClientAccountService.service;
+package org.mercury.ClientService.service;
 
-import org.mercury.ClientAccountService.bean.Company;
-import org.mercury.ClientAccountService.bean.Contact;
-import org.mercury.ClientAccountService.dao.CompanyDao;
-import org.mercury.ClientAccountService.dao.ContactDao;
+import org.mercury.ClientService.bean.Company;
+import org.mercury.ClientService.bean.Contact;
+import org.mercury.ClientService.dao.CompanyDao;
+import org.mercury.ClientService.dao.ContactDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

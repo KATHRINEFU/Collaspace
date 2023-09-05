@@ -1,7 +1,7 @@
-package org.mercury.ClientAccountService.controller;
+package org.mercury.ClientService.controller;
 
-import org.mercury.ClientAccountService.bean.Contact;
-import org.mercury.ClientAccountService.service.ContactService;
+import org.mercury.ClientService.bean.Contact;
+import org.mercury.ClientService.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

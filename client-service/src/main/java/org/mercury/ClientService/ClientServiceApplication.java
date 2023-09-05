@@ -1,10 +1,10 @@
-package org.mercury.ClientAccountService;
+package org.mercury.ClientService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @ClassName org.mercury.ClientAccountService.ClientAccountServiceApplication
+ * @ClassName org.mercury.ClientService.ClientServiceApplication
  * @Description TODO
  * @Author katefu
  * @Date 8/17/23 2:47 PM
@@ -12,8 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  **/
 
 @SpringBootApplication
-public class ClientAccountServiceApplication {
+public class ClientServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ClientAccountServiceApplication.class, args);
+        SpringApplication.run(ClientServiceApplication.class, args);
     }
 }
