@@ -1,5 +1,7 @@
 package org.mercury.AccountService.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.mercury.AccountService.bean.Account;
 import org.mercury.AccountService.dto.AccountEditRequest;
 import org.mercury.AccountService.dto.AccountRequest;
@@ -21,10 +23,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/account")
+@Tag(name = "AccountService", description = "account service")
 public class AccountController {
     @Autowired
     private AccountService accountService;
 
+    @Operation(summary = "get all accounts", description = "get all accounts", tags = { "AccountService" })
     @GetMapping("/all")
     public List<Account> getAllAccounts(){
         return accountService.getAll();

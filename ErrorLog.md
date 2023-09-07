@@ -68,3 +68,32 @@
   - Key in SearchCriteria should be 'eventCreationdate'
 - table id keeps saying duplicate
   - remove subclass's id field
+## Third Party Dependencies
+### Swagger 
+ - Swagger from SpringFox not works with Springboot3, need to use openAPI
+```xml
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>2.2.0</version>
+            </dependency>
+```
+ - Add @OpenAPIDefinition in main class
+ - Problem: No operations defined in spec:
+   - Swagger Config class: 
+   ```java
+    @Bean
+    public GroupedOpenApi publicApi() {
+        return GroupedOpenApi.builder()
+                .group("collaspace-public")
+                .pathsToMatch("/account/**")
+                .build();
+    }
+    ```
+   - application.properties
+   ```xml
+    springdoc.packagesToScan=org.mercury.AccountService
+    springdoc.swagger-ui.display-request-duration=true
+    springdoc.swagger-ui.use-root-path=true
+    springdoc.swagger-ui.disable-swagger-default-url=true
+    ```
