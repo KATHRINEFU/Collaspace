@@ -2,6 +2,7 @@ package org.mercury.TicketService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @ClassName TicketServiceApplication
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  **/
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class TicketServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(TicketServiceApplication.class, args);

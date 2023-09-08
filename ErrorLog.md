@@ -100,3 +100,18 @@
  ### Eureka
 - Tomcat unable to start
   - remove spring security related dependencies from parent
+- @EnableEurekaClient import not found
+  - use @EnableDiscoveryClient or just have the pom dependency
+- Multiple instances for one service
+  - set server-port to 0
+  - call as 'http://inventory-service/api/inventory'
+  - enable client side load balancing
+  - OrderService's web client config 
+    - WebClient -> WebClient.Builder
+    - add @LoadBalanced
+### Api Gateway
+- Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway.
+  - Add to application.properties: spring.main.web-application-type=reactive
+- Request path 404
+  - Add to application.properties:eureka.instance.hostname=localhost
+  - Or replace uri lb with localhost

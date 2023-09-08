@@ -23,7 +23,7 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public List<Team> getAllTeams(){
         return teamService.getAll();
     }
