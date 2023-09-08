@@ -97,3 +97,6 @@
     springdoc.swagger-ui.use-root-path=true
     springdoc.swagger-ui.disable-swagger-default-url=true
     ```
+ ### Eureka
+- Tomcat unable to start
+  - remove spring security related dependencies from parent
