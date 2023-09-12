@@ -97,6 +97,7 @@
     springdoc.swagger-ui.use-root-path=true
     springdoc.swagger-ui.disable-swagger-default-url=true
     ```
+ - entry url: http://localhost:8081/swagger-ui/index.html?urls.primaryName=collaspace-public
  ### Eureka
 - Tomcat unable to start
   - remove spring security related dependencies from parent
@@ -110,8 +111,46 @@
     - WebClient -> WebClient.Builder
     - add @LoadBalanced
 ### Api Gateway
-- Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway.
-  - Add to application.properties: spring.main.web-application-type=reactive
-- Request path 404
-  - Add to application.properties:eureka.instance.hostname=localhost
-  - Or replace uri lb with localhost
+  - Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway.
+    - Add to application.properties: spring.main.web-application-type=reactive
+    - Request path 404
+      - Add to ApiGatewayApplication:
+      ```java
+      @Bean
+      public HttpClient httpClient() {
+          return HttpClient.create().resolver(DefaultAddressResolverGroup.INSTANCE);
+      }
+      ```
+
+### Spring Security
+- SecurityFilterChain methods deprecated: csrf, requestMatchers ...
+```java
+public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+    return httpSecurity
+        .csrf(csrf -> csrf.disable())
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/token/**").permitAll()
+            .anyRequest().authenticated()
+        )
+        .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+        .httpBasic(Customizer.withDefaults())
+        .build();
+}
+```
+- JWT DefaultJwtBuilder class not found
+  - add other dependencies:
+  ```xml
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-impl</artifactId>
+        <version>0.11.5</version>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-jackson</artifactId>
+        <version>0.11.5</version>
+        <scope>runtime</scope>
+    </dependency>
+  ```

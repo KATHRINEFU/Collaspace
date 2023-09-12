@@ -4,36 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added eureka server, tried spring security">
-      <change afterPath="$PROJECT_DIR$/api-gateway/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/ApiGatewayApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added api gateway">
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/bean/UserCredential.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/AuthConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/CustomUserDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/CustomUserDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/controller/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/dao/UserCredentialDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/dto/AuthRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/dto/ValidationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/service/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/service/JwtService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErrorLog.md" beforeDir="false" afterPath="$PROJECT_DIR$/ErrorLog.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/account-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/AccountServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/AccountServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/account-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client-order-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client-order-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client-service/src/main/java/org/mercury/ClientService/ClientServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/client-service/src/main/java/org/mercury/ClientService/ClientServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/discovery-server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/discovery-server/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/document-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/document-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/EmployeeServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/EmployeeServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/EventServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/EventServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/TeamServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/TeamServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/TeamController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/TicketServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/TicketServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/AuthServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/AuthServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/RedisConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/utils/FastJsonRedisSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/utils/JwtUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/utils/RedisCache.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/utils/WebUtil.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +35,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="AnnotationType" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -68,39 +60,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/katefu/Jobs/mercury/project/collaspace-parent/account-service/src/main/resources&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;f3ce97f5e743337dc62cfe09000de82c&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "extract.method.default.visibility": "private",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "/Users/katefu/Jobs/mercury/project/collaspace-parent/auth-service/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "spring.configuration.checksum": "094eab5620557d08844d6b4d43383df2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.mercury.AccountService" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/auth-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/account-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/client-account-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/team-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/event-service/src/main/resources" />
-      <recent name="$PROJECT_DIR$/ticket-service/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.mercury.AccountService" />
@@ -115,7 +107,7 @@
       <command value="mvn clean verify" />
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.AuthServiceApplication">
     <configuration name="AccountServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
       <option name="ACTIVE_PROFILES" />
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
@@ -126,6 +118,40 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="api-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.mercury.ApiGateway.ApiGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <module name="auth-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.mercury.AuthService.AuthServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DiscoveryServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="discovery-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.mercury.DiscoveryServer.DiscoveryServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.ApiGatewayApplication" />
+      <item itemvalue="Spring Boot.AuthServiceApplication" />
+      <item itemvalue="Spring Boot.AccountServiceApplication" />
+      <item itemvalue="Spring Boot.DiscoveryServerApplication" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -139,7 +165,8 @@
       <workItem from="1692451853541" duration="51422000" />
       <workItem from="1693177253598" duration="58585000" />
       <workItem from="1694143937768" duration="4100000" />
-      <workItem from="1694181772086" duration="10424000" />
+      <workItem from="1694181772086" duration="10702000" />
+      <workItem from="1694392266751" duration="12889000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -239,7 +266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694145479335</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="added api gateway">
+      <created>1694215527685</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1694215527685</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,6 +305,7 @@
     <MESSAGE value="added api for clientAccountService-contact" />
     <MESSAGE value="added connection to swagger api doc" />
     <MESSAGE value="added eureka server, tried spring security" />
-    <option name="LAST_COMMIT_MESSAGE" value="added eureka server, tried spring security" />
+    <MESSAGE value="added api gateway" />
+    <option name="LAST_COMMIT_MESSAGE" value="added api gateway" />
   </component>
 </project>
