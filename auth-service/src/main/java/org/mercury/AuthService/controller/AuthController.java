@@ -1,5 +1,6 @@
 package org.mercury.AuthService.controller;
 
+import io.jsonwebtoken.JwtException;
 import org.mercury.AuthService.bean.UserCredential;
 import org.mercury.AuthService.dto.AuthRequest;
 import org.mercury.AuthService.dto.ValidationRequest;
@@ -57,7 +58,12 @@ public class AuthController {
 
     @GetMapping("/validate")
     public ResponseEntity<String> validateToken(@RequestBody ValidationRequest validationRequest) {
-        authService.validateToken(validationRequest.getToken());
-        return ResponseEntity.status(HttpStatus.CREATED).body("Token is valid");
+        try{
+            authService.validateToken(validationRequest.getToken());
+            return ResponseEntity.status(HttpStatus.CREATED).body("Token is valid");
+        }catch (JwtException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+
     }
 }

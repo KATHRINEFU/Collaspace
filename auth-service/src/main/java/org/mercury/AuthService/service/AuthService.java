@@ -1,5 +1,6 @@
 package org.mercury.AuthService.service;
 
+import io.jsonwebtoken.JwtException;
 import org.mercury.AuthService.bean.UserCredential;
 import org.mercury.AuthService.dao.UserCredentialDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,7 @@ public class AuthService {
         return jwtService.generateToken(username);
     }
 
-    public void validateToken(String token){
+    public void validateToken (String token) throws JwtException {
         jwtService.validateToken(token);
     }
-
 }
