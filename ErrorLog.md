@@ -98,7 +98,9 @@
     springdoc.swagger-ui.disable-swagger-default-url=true
     ```
  - entry url: http://localhost:8081/swagger-ui/index.html?urls.primaryName=collaspace-public
- ### Eureka
+ - Deploy Swagger on Microservice, ApiGateway
+   - ApiGate way dependency should be webflux
+### Eureka
 - Tomcat unable to start
   - remove spring security related dependencies from parent
 - @EnableEurekaClient import not found
@@ -154,3 +156,7 @@ public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Excepti
         <scope>runtime</scope>
     </dependency>
   ```
+  
+- Microservice Communication
+  - Feigh VS webclient: 
+    - The WebClient is Asynchronous and non blocking REST invoker. While the Feign client and RestTemplates creates a thread for each request and blocks it until it receives a response.

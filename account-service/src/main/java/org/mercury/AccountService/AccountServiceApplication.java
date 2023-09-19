@@ -1,7 +1,7 @@
 package org.mercury.AccountService;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springdoc.core.customizers.OperationCustomizer;
@@ -24,11 +24,16 @@ import static org.springdoc.core.utils.Constants.ALL_PATTERN;
  **/
 
 @SpringBootApplication
-@OpenAPIDefinition
+@OpenAPIDefinition(info = @Info(title = "AccountServiceAPI", description = "Account Service API v1.0"))
 @EnableDiscoveryClient
 public class AccountServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(AccountServiceApplication.class, args);
+    }
+
+    @Bean
+    public GroupedOpenApi accountApis(){
+        return GroupedOpenApi.builder().pathsToMatch("/account/**").group("account").build();
     }
 
 //    @Bean
