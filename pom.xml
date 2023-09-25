@@ -25,6 +25,8 @@
         <module>auth-service</module>
         <module>discovery-server</module>
         <module>api-gateway</module>
+        <module>oauth-server</module>
+        <module>gateway-client</module>
     </modules>
 
     <properties>
