@@ -1,9 +1,12 @@
 package org.mercury.EmployeeService.service;
 
+import org.mercury.EmployeeService.bean.Department;
 import org.mercury.EmployeeService.bean.Employee;
 import org.mercury.EmployeeService.bean.Ticket;
 import org.mercury.EmployeeService.criteria.SearchCriteria;
+import org.mercury.EmployeeService.dao.DepartmentDao;
 import org.mercury.EmployeeService.dao.EmployeeDao;
+import org.mercury.EmployeeService.dto.EmployeeRegistration;
 import org.mercury.EmployeeService.filter.EmployeeFilter;
 import org.mercury.EmployeeService.http.Response;
 import org.mercury.EmployeeService.specification.EmployeeSpecification;
@@ -29,6 +32,8 @@ import java.util.Optional;
 public class EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
+    @Autowired
+    private DepartmentDao departmentDao;
 
     @Autowired
     private WebClient webClient;
@@ -42,9 +47,21 @@ public class EmployeeService {
         return optionalEmployee.orElse(null);
     }
 
-    public Response register(Employee employee){
-        employeeDao.save(employee);
-        return new Response(true);
+    public Employee register(EmployeeRegistration employeeRegistration){
+        Employee employee = new Employee();
+        employee.setEmployeeFirstname(employeeRegistration.getEmployeeFirstname());
+        employee.setEmployeeLastname(employeeRegistration.getEmployeeLastname());
+        employee.setEmployeeEmail(employeeRegistration.getEmployeeEmail());
+        employee.setEmployeeLocationCountry(employeeRegistration.getEmployeeLocationCountry());
+        employee.setEmployeeLocationCity(employeeRegistration.getEmployeeLocationCity());
+        employee.setEmployeeRole(employeeRegistration.getEmployeeRole());
+        employee.setEmployeePhone(employeeRegistration.getEmployeePhone());
+        employee.setEmployeeStartdate(new Date());
+
+        List<Department> departments = departmentDao.findAllByDepartmentName(employeeRegistration.getDepartment());
+        employee.setDepartmentId(departments.get(0).getDepartmentId());
+        //TODO: register in AuthService
+        return employeeDao.save(employee);
     }
 
     public List<Employee> getWithFilter(EmployeeFilter employeeFilter){

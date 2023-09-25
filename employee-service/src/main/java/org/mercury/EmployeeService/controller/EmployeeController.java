@@ -2,10 +2,13 @@ package org.mercury.EmployeeService.controller;
 
 import org.mercury.EmployeeService.bean.Employee;
 import org.mercury.EmployeeService.bean.Ticket;
+import org.mercury.EmployeeService.dto.EmployeeRegistration;
 import org.mercury.EmployeeService.filter.EmployeeFilter;
 import org.mercury.EmployeeService.http.Response;
 import org.mercury.EmployeeService.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +30,7 @@ public class EmployeeController {
 
     @GetMapping("/all")
     public List<Employee> getAll(){
+
         return employeeService.getAll();
     }
 
@@ -41,7 +45,17 @@ public class EmployeeController {
         return employeeService.getWithFilter(employeeFilter);
     }
     @PostMapping("/create")
-    public Response addEmployee(@RequestBody Employee employee){
-        return employeeService.register(employee);
+    public ResponseEntity<String> addEmployee(@RequestBody EmployeeRegistration employeeRegistration) {
+        System.out.println("Received request for creating employee");
+        try {
+            Employee addedEmployee = employeeService.register(employeeRegistration);
+            if (addedEmployee != null) {
+                return ResponseEntity.status(HttpStatus.OK).body("Employee registered successfully");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee failed to register");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }
