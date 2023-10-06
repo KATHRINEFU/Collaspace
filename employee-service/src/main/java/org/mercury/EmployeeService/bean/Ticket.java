@@ -26,4 +26,5 @@ public class Ticket {
     private String ticketTitle;
     private String ticketDescription;
     private String ticketStatus;
+    private TicketAssign ticketAssigns;
 }

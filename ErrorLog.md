@@ -157,6 +157,41 @@ public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Excepti
     </dependency>
   ```
   
-- Microservice Communication
-  - Feigh VS webclient: 
-    - The WebClient is Asynchronous and non blocking REST invoker. While the Feign client and RestTemplates creates a thread for each request and blocks it until it receives a response.
+### Microservice Communication
+- Feigh VS webclient: 
+  - The WebClient is Asynchronous and non blocking REST invoker. While the Feign client and RestTemplates creates a thread for each request and blocks it until it receives a response.
+- RabbitMQ
+    - add queue:
+      - add in management console: http://localhost:15672/#/
+      - add in RabbitMQ Config file:
+      ```java
+      @Configuration
+      public class RabbitMQConfig {
+          @Bean
+          public Queue createUserRegistrationQueue() {
+              return new Queue("q.user-registration");
+          }
+      }
+      ```
+    - send message:
+  ```java
+    rabbitTemplate.convertAndSend("", "get-employee-teams", teamsRequest);
+    ```
+  Here first argument is exchange, second one is routing key and last one is the payload.
+  In the rabbitMQ universe, an exchange is like a post office, a queue is like the physical location, and the routing key is the address of that location. When we created the queue and didn’t bound with any exchange, the default exchange automatically got bound with it and took the routing key as the queue’s name.
+    - The request object should implement Serializable interface
+ - How to continue logic after receiving all messages?
+## Frontend Connection
+- CORS enable: enable in actual service
+```java
+      @Bean
+      public WebMvcConfigurer corsConfigurer() {
+          return new WebMvcConfigurer() {
+              @Override
+              public void addCorsMappings(CorsRegistry registry) {
+                  registry.addMapping("/**").allowedOrigins("http://localhost:5174");
+              }
+          };
+      }
+   ```
+- Can get but post still not allowed

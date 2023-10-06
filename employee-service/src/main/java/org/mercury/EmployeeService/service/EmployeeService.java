@@ -1,15 +1,19 @@
 package org.mercury.EmployeeService.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.mercury.EmployeeService.bean.Department;
 import org.mercury.EmployeeService.bean.Employee;
-import org.mercury.EmployeeService.bean.Ticket;
 import org.mercury.EmployeeService.criteria.SearchCriteria;
 import org.mercury.EmployeeService.dao.DepartmentDao;
 import org.mercury.EmployeeService.dao.EmployeeDao;
+import org.mercury.EmployeeService.dto.EmployeeDashboard;
+import org.mercury.EmployeeService.dto.EmployeeGetTeamsRequest;
+import org.mercury.EmployeeService.dto.EmployeeGetTeamsReturn;
 import org.mercury.EmployeeService.dto.EmployeeRegistration;
 import org.mercury.EmployeeService.filter.EmployeeFilter;
-import org.mercury.EmployeeService.http.Response;
 import org.mercury.EmployeeService.specification.EmployeeSpecification;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -29,6 +33,7 @@ import java.util.Optional;
  **/
 
 @Service
+@Slf4j
 public class EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
@@ -37,6 +42,9 @@ public class EmployeeService {
 
     @Autowired
     private WebClient webClient;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     public List<Employee> getAll(){
         return employeeDao.findAll();
@@ -106,5 +114,19 @@ public class EmployeeService {
         }
 
         return employeeDao.findAll(finalSpecification);
+    }
+
+    @RabbitListener(queues = {"q.return-employee-teams"})
+    public void onListenReturnEmployeeTeams(EmployeeGetTeamsReturn teamsReturn){
+        log.info("Return-Employee_Teams message received: {}", teamsReturn.getTeamList());
+    }
+
+
+    public List<EmployeeDashboard> getDashboardData(int id) {
+        EmployeeGetTeamsRequest teamsRequest = new EmployeeGetTeamsRequest(id);
+        rabbitTemplate.convertAndSend("", "q.get-employee-teams", teamsRequest);
+
+
+        return null;
     }
 }

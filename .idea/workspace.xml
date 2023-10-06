@@ -4,19 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added swagger config for apigateway, leaving 'no operation defined'">
-      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Department.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dao/DepartmentDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dto/EmployeeRegistration.java" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added oauth and gateway client">
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Announcement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Event.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Team.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/TicketAssign.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/config/RabbitMQConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dto/EmployeeDashboard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dto/EmployeeGetTeamsRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dto/EmployeeGetTeamsReturn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/bean/TeamMember.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/config/RabbitMQConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dao/TeamMemberDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/EmployeeGetTeamsRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/EmployeeGetTeamsReturn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/listener/GetEmployeeTeamsListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErrorLog.md" beforeDir="false" afterPath="$PROJECT_DIR$/ErrorLog.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/filter/AuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/filter/AuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/filter/RouteValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/filter/RouteValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/AuthConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/AuthConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/EmployeeServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/EmployeeServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Ticket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/TicketAssign.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/TicketAssign.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +47,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="oauth" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -89,11 +108,11 @@
       <recent name="$PROJECT_DIR$/event-service/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.mercury.EmployeeService.dto" />
+      <recent name="org.mercury.TeamService.dto" />
       <recent name="org.mercury.AccountService" />
       <recent name="org.mercury.ClientAccountService" />
       <recent name="org.mercury.TeamService" />
-      <recent name="org.mercury.EventService.bean" />
-      <recent name="org.mercury.EventService.criteria" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -108,7 +127,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.AccountServiceApplication">
+  <component name="RunManager" selected="Spring Boot.EmployeeServiceApplication">
     <configuration name="AccountServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
       <option name="ACTIVE_PROFILES" />
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
@@ -219,6 +238,8 @@
       <workItem from="1694392266751" duration="21278000" />
       <workItem from="1694699376310" duration="18056000" />
       <workItem from="1695585915358" duration="7901000" />
+      <workItem from="1695779541163" duration="1198000" />
+      <workItem from="1696174107370" duration="20184000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -357,7 +378,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -383,16 +416,5 @@
     <MESSAGE value="added authentication on api gateway" />
     <MESSAGE value="added swagger config for apigateway, leaving 'no operation defined'" />
     <option name="LAST_COMMIT_MESSAGE" value="added swagger config for apigateway, leaving 'no operation defined'" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

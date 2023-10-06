@@ -31,5 +31,8 @@ public class TicketAssign {
     private int employeeId;
 
     @Column
+    private int teamId;
+
+    @Column
     private String role;
 }

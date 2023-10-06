@@ -1,11 +1,14 @@
 package org.mercury.EmployeeService.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.mercury.EmployeeService.bean.Employee;
 import org.mercury.EmployeeService.bean.Ticket;
+import org.mercury.EmployeeService.dto.EmployeeDashboard;
 import org.mercury.EmployeeService.dto.EmployeeRegistration;
 import org.mercury.EmployeeService.filter.EmployeeFilter;
 import org.mercury.EmployeeService.http.Response;
 import org.mercury.EmployeeService.service.EmployeeService;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
+@Slf4j
 public class EmployeeController {
 
     @Autowired
@@ -44,9 +48,16 @@ public class EmployeeController {
         // can be filtered by location, departmentId, startdate, role
         return employeeService.getWithFilter(employeeFilter);
     }
+
+    @GetMapping("/dashboard/{id}")
+    public List<EmployeeDashboard> getEmployeeDashBoardData(@PathVariable int id){
+        return employeeService.getDashboardData(id);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<String> addEmployee(@RequestBody EmployeeRegistration employeeRegistration) {
         System.out.println("Received request for creating employee");
+        log.info("Received request for creating employee");
         try {
             Employee addedEmployee = employeeService.register(employeeRegistration);
             if (addedEmployee != null) {
