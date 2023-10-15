@@ -3,6 +3,7 @@ package org.mercury.EmployeeService.service;
 import lombok.extern.slf4j.Slf4j;
 import org.mercury.EmployeeService.bean.Department;
 import org.mercury.EmployeeService.bean.Employee;
+import org.mercury.EmployeeService.bean.Team;
 import org.mercury.EmployeeService.criteria.SearchCriteria;
 import org.mercury.EmployeeService.dao.DepartmentDao;
 import org.mercury.EmployeeService.dao.EmployeeDao;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @ClassName EmployeeService
@@ -41,10 +43,9 @@ public class EmployeeService {
     private DepartmentDao departmentDao;
 
     @Autowired
-    private WebClient webClient;
-
-    @Autowired
     private RabbitTemplate rabbitTemplate;
+
+    private CompletableFuture<List<Team>> teamsFuture;
 
     public List<Employee> getAll(){
         return employeeDao.findAll();
@@ -119,14 +120,37 @@ public class EmployeeService {
     @RabbitListener(queues = {"q.return-employee-teams"})
     public void onListenReturnEmployeeTeams(EmployeeGetTeamsReturn teamsReturn){
         log.info("Return-Employee_Teams message received: {}", teamsReturn.getTeamList());
+        // TODO: how to add teamList to EmployeeDashboard in returnDashBoardData?
+        teamsFuture.complete(teamsReturn.getTeamList());
     }
 
 
-    public List<EmployeeDashboard> getDashboardData(int id) {
+    public CompletableFuture<EmployeeDashboard> sendRequestForDashboardData(int id) {
+        // TODO: send requests to all other services
+        EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+        List<CompletableFuture<List<Team>>> futures = new ArrayList<>();
+
+
+        teamsFuture = new CompletableFuture<>();
         EmployeeGetTeamsRequest teamsRequest = new EmployeeGetTeamsRequest(id);
         rabbitTemplate.convertAndSend("", "q.get-employee-teams", teamsRequest);
+        futures.add(teamsFuture);
 
+        CompletableFuture<Void> allOfFuture = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
+        return allOfFuture.thenApply(voidResult -> {
+            // Process the results from all services
+            for (CompletableFuture<List<Team>> future : futures) {
+                List<Team> teams = future.join(); // Get the result of each future
+                for(Team team: teams){
+                    System.out.println(team.getTeamName());
+                }
+                employeeDashboard.setTeams(teams);
+                // Process teams as needed
+            }
 
-        return null;
+            // Set the teams in the employeeDashboard
+            return employeeDashboard;
+        });
     }
+
 }

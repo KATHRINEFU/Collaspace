@@ -2,19 +2,18 @@ package org.mercury.EmployeeService.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.mercury.EmployeeService.bean.Employee;
-import org.mercury.EmployeeService.bean.Ticket;
+import org.mercury.EmployeeService.bean.Team;
 import org.mercury.EmployeeService.dto.EmployeeDashboard;
 import org.mercury.EmployeeService.dto.EmployeeRegistration;
 import org.mercury.EmployeeService.filter.EmployeeFilter;
-import org.mercury.EmployeeService.http.Response;
 import org.mercury.EmployeeService.service.EmployeeService;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @ClassName EmployeeController
@@ -50,8 +49,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/dashboard/{id}")
-    public List<EmployeeDashboard> getEmployeeDashBoardData(@PathVariable int id){
-        return employeeService.getDashboardData(id);
+    public CompletableFuture<EmployeeDashboard> getEmployeeDashBoardData(@PathVariable int id){
+        return employeeService.sendRequestForDashboardData(id)
+                .thenApply(employeeDashboard -> {
+                    // Perform any additional processing if needed
+                    // This block executes when all services have responded
+                    return employeeDashboard;
+                });
     }
 
     @PostMapping("/create")

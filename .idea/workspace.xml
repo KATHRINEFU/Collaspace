@@ -4,33 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added oauth and gateway client">
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Announcement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Event.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Team.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/TicketAssign.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/config/RabbitMQConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dto/EmployeeDashboard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dto/EmployeeGetTeamsRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dto/EmployeeGetTeamsReturn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/bean/TeamMember.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/config/RabbitMQConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dao/TeamMemberDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/EmployeeGetTeamsRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/EmployeeGetTeamsReturn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/listener/GetEmployeeTeamsListener.java" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added rabbitmq in getting dashboard, not returned">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErrorLog.md" beforeDir="false" afterPath="$PROJECT_DIR$/ErrorLog.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/EmployeeServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/EmployeeServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Ticket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/TicketAssign.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/TicketAssign.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,7 +216,7 @@
       <workItem from="1694699376310" duration="18056000" />
       <workItem from="1695585915358" duration="7901000" />
       <workItem from="1695779541163" duration="1198000" />
-      <workItem from="1696174107370" duration="20184000" />
+      <workItem from="1696174107370" duration="29051000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -367,7 +344,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695133722768</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="added rabbitmq in getting dashboard, not returned">
+      <created>1696605300292</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1696605300292</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -415,6 +399,7 @@
     <MESSAGE value="added spring security and jwt on auth service" />
     <MESSAGE value="added authentication on api gateway" />
     <MESSAGE value="added swagger config for apigateway, leaving 'no operation defined'" />
-    <option name="LAST_COMMIT_MESSAGE" value="added swagger config for apigateway, leaving 'no operation defined'" />
+    <MESSAGE value="added rabbitmq in getting dashboard, not returned" />
+    <option name="LAST_COMMIT_MESSAGE" value="added rabbitmq in getting dashboard, not returned" />
   </component>
 </project>
