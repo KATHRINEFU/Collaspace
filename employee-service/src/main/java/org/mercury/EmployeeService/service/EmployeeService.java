@@ -1,16 +1,14 @@
 package org.mercury.EmployeeService.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mercury.EmployeeService.bean.Client;
 import org.mercury.EmployeeService.bean.Department;
 import org.mercury.EmployeeService.bean.Employee;
 import org.mercury.EmployeeService.bean.Team;
 import org.mercury.EmployeeService.criteria.SearchCriteria;
 import org.mercury.EmployeeService.dao.DepartmentDao;
 import org.mercury.EmployeeService.dao.EmployeeDao;
-import org.mercury.EmployeeService.dto.EmployeeDashboard;
-import org.mercury.EmployeeService.dto.EmployeeGetTeamsRequest;
-import org.mercury.EmployeeService.dto.EmployeeGetTeamsReturn;
-import org.mercury.EmployeeService.dto.EmployeeRegistration;
+import org.mercury.EmployeeService.dto.*;
 import org.mercury.EmployeeService.filter.EmployeeFilter;
 import org.mercury.EmployeeService.specification.EmployeeSpecification;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -46,6 +44,7 @@ public class EmployeeService {
     private RabbitTemplate rabbitTemplate;
 
     private CompletableFuture<List<Team>> teamsFuture;
+    private CompletableFuture<List<Client>> clientsFuture;
 
     public List<Employee> getAll(){
         return employeeDao.findAll();
@@ -125,9 +124,9 @@ public class EmployeeService {
     }
 
 
-    public CompletableFuture<EmployeeDashboard> sendRequestForDashboardData(int id) {
-        // TODO: send requests to all other services
-        EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+    public CompletableFuture<List<Team>> sendRequestForTeamsData(int id) {
+        // TODO: send requests to team services
+        List<Team> employeeTeams = new ArrayList<>();
         List<CompletableFuture<List<Team>>> futures = new ArrayList<>();
 
 
@@ -142,14 +141,12 @@ public class EmployeeService {
             for (CompletableFuture<List<Team>> future : futures) {
                 List<Team> teams = future.join(); // Get the result of each future
                 for(Team team: teams){
+                    employeeTeams.add(team);
                     System.out.println(team.getTeamName());
                 }
-                employeeDashboard.setTeams(teams);
-                // Process teams as needed
             }
 
-            // Set the teams in the employeeDashboard
-            return employeeDashboard;
+            return employeeTeams;
         });
     }
 

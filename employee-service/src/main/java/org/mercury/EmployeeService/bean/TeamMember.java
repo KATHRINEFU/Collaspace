@@ -1,7 +1,10 @@
-package org.mercury.TeamService.bean;
+package org.mercury.EmployeeService.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,28 +16,16 @@ import java.util.Date;
  * @ClassName TeamMember
  * @Description TODO
  * @Author katefu
- * @Date 10/5/23 10:10 AM
+ * @Date 10/16/23 10:58 AM
  * @Version 1.0
  **/
 
-@Entity
-@Table(name = "TEAM_MEMBER")
+
 public class TeamMember {
-    @Id
-    @SequenceGenerator(name = "team_member_seq_gen", sequenceName = "TEAM_MEMBER_TEAM_MEMBER_ID_SEQ", allocationSize = 1)
-    @GeneratedValue(generator="team_member_seq_gen", strategy = GenerationType.AUTO)
     private int teamMemberId;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private Team team;
-
-    @Column
     private int employeeId;
-
-    @Column
     private Date joindate;
-
-    @Column
     private String role;
 
     public TeamMember() {
@@ -52,37 +43,37 @@ public class TeamMember {
         return teamMemberId;
     }
 
+    public void setTeamMemberId(int teamMemberId) {
+        this.teamMemberId = teamMemberId;
+    }
+
     @JsonIgnore
     public Team getTeam() {
         return team;
-    }
-
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public Date getJoindate() {
-        return joindate;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setTeamMemberId(int teamMemberId) {
-        this.teamMemberId = teamMemberId;
     }
 
     public void setTeam(Team team) {
         this.team = team;
     }
 
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
 
+    public Date getJoindate() {
+        return joindate;
+    }
+
     public void setJoindate(Date joindate) {
         this.joindate = joindate;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public void setRole(String role) {

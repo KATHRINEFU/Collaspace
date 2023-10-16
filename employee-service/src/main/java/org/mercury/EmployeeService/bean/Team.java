@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName Team
@@ -24,4 +25,7 @@ public class Team {
     private String teamDescription;
     private String teamType;
     private Integer teamDepartmentId;
+    private List<TeamAccount> accounts;
+    private List<TeamMember> members;
+    private List<Announcement> announcements;
 }

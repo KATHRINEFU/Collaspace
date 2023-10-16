@@ -1,6 +1,7 @@
 package org.mercury.EmployeeService.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mercury.EmployeeService.bean.Client;
 import org.mercury.EmployeeService.bean.Employee;
 import org.mercury.EmployeeService.bean.Team;
 import org.mercury.EmployeeService.dto.EmployeeDashboard;
@@ -48,15 +49,23 @@ public class EmployeeController {
         return employeeService.getWithFilter(employeeFilter);
     }
 
-    @GetMapping("/dashboard/{id}")
-    public CompletableFuture<EmployeeDashboard> getEmployeeDashBoardData(@PathVariable int id){
-        return employeeService.sendRequestForDashboardData(id)
-                .thenApply(employeeDashboard -> {
+    @GetMapping("/teams/{id}")
+    public CompletableFuture<List<Team>> getEmployeeTeamsData(@PathVariable int id){
+        return employeeService.sendRequestForTeamsData(id)
+                .thenApply(teams -> {
                     // Perform any additional processing if needed
                     // This block executes when all services have responded
-                    return employeeDashboard;
+                    return teams;
                 });
     }
+
+//    @GetMapping("/clients/{id}")
+//    public CompletableFuture<List<Client>> getEmployeeClientsData(@PathVariable int id){
+//        return employeeService.sendRequestForClientsData(id)
+//                .thenApply(clients -> {
+//                    return clients;
+//                });
+//    }
 
     @PostMapping("/create")
     public ResponseEntity<String> addEmployee(@RequestBody EmployeeRegistration employeeRegistration) {

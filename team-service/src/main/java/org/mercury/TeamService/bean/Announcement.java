@@ -1,5 +1,6 @@
 package org.mercury.TeamService.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +19,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "ANNOUNCEMENT")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Announcement {
     @Id
     @SequenceGenerator(name = "announcement_seq_gen", sequenceName = "ANNOUNCEMENT_ANNOUNCEMENT_ID_SEQ", allocationSize = 1)
@@ -36,4 +36,56 @@ public class Announcement {
 
     @Column
     private String announcementContent;
+
+    public Announcement() {
+    }
+
+    public Announcement(int announcementId, Team team, int announcementCreator, Date announcementCreationdate, String announcementContent) {
+        this.announcementId = announcementId;
+        this.team = team;
+        this.announcementCreator = announcementCreator;
+        this.announcementCreationdate = announcementCreationdate;
+        this.announcementContent = announcementContent;
+    }
+
+    public int getAnnouncementId() {
+        return announcementId;
+    }
+
+    @JsonIgnore
+    public Team getTeam() {
+        return team;
+    }
+
+    public int getAnnouncementCreator() {
+        return announcementCreator;
+    }
+
+    public Date getAnnouncementCreationdate() {
+        return announcementCreationdate;
+    }
+
+    public String getAnnouncementContent() {
+        return announcementContent;
+    }
+
+    public void setAnnouncementId(int announcementId) {
+        this.announcementId = announcementId;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public void setAnnouncementCreator(int announcementCreator) {
+        this.announcementCreator = announcementCreator;
+    }
+
+    public void setAnnouncementCreationdate(Date announcementCreationdate) {
+        this.announcementCreationdate = announcementCreationdate;
+    }
+
+    public void setAnnouncementContent(String announcementContent) {
+        this.announcementContent = announcementContent;
+    }
 }
