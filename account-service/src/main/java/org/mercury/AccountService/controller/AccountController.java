@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.mercury.AccountService.bean.Account;
 import org.mercury.AccountService.dto.AccountEditRequest;
 import org.mercury.AccountService.dto.AccountRequest;
+import org.mercury.AccountService.dto.AccountWithCompanyReturn;
 import org.mercury.AccountService.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @ClassName AccountController
@@ -37,6 +39,17 @@ public class AccountController {
     @GetMapping("/{id}")
     public  Account getAccountById(@PathVariable int id){
         return accountService.getAccountById(id);
+    }
+
+    @GetMapping("/withcompany/{id}")
+    public CompletableFuture<ResponseEntity<?>> getAccountWithCompanyById(@PathVariable int id) {
+        return accountService.sendRequestForAccountWithCompanyData(id)
+                .thenApply(accountWithCompanyReturn -> {
+                    if (accountWithCompanyReturn == null) {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Account not found");
+                    }
+                    return ResponseEntity.ok(accountWithCompanyReturn);
+                });
     }
 
     @PostMapping("/create")

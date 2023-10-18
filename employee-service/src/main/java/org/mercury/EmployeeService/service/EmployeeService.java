@@ -44,7 +44,6 @@ public class EmployeeService {
     private RabbitTemplate rabbitTemplate;
 
     private CompletableFuture<List<Team>> teamsFuture;
-    private CompletableFuture<List<Client>> clientsFuture;
 
     public List<Employee> getAll(){
         return employeeDao.findAll();
