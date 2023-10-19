@@ -1,10 +1,7 @@
 package org.mercury.EmployeeService.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.mercury.EmployeeService.bean.Client;
-import org.mercury.EmployeeService.bean.Department;
-import org.mercury.EmployeeService.bean.Employee;
-import org.mercury.EmployeeService.bean.Team;
+import org.mercury.EmployeeService.bean.*;
 import org.mercury.EmployeeService.criteria.SearchCriteria;
 import org.mercury.EmployeeService.dao.DepartmentDao;
 import org.mercury.EmployeeService.dao.EmployeeDao;
@@ -140,8 +137,12 @@ public class EmployeeService {
             for (CompletableFuture<List<Team>> future : futures) {
                 List<Team> teams = future.join(); // Get the result of each future
                 for(Team team: teams){
+                    for(Announcement announcement: team.getAnnouncements()){
+                        Employee announcementCreator = employeeDao.findById(announcement.getAnnouncementCreator()).orElse(null);
+                        if(announcementCreator!=null) announcement.setAnnouncementCreatorName(announcementCreator.getEmployeeFirstname() + " " + announcementCreator.getEmployeeLastname());
+                    }
                     employeeTeams.add(team);
-                    System.out.println(team.getTeamName());
+//                    System.out.println(team.getTeamName());
                 }
             }
 

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName Event
@@ -52,4 +53,7 @@ public class Event {
 
     @Column
     private Date eventLastUpdatedate;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "event")
+    private List<EventCollaboration> collaborations;
 }

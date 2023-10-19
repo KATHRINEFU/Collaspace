@@ -181,6 +181,8 @@ public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Excepti
   In the rabbitMQ universe, an exchange is like a post office, a queue is like the physical location, and the routing key is the address of that location. When we created the queue and didn’t bound with any exchange, the default exchange automatically got bound with it and took the routing key as the queue’s name.
     - The request object should implement Serializable interface
  - How to continue logic after receiving all messages?
+   - completable future
+ - if two request for company coming too close, it will receive the same company
 ## Frontend Connection
 - CORS enable: enable in actual service
 ```java

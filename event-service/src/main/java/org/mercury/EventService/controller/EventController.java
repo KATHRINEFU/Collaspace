@@ -46,6 +46,13 @@ public class EventController {
         return eventService.getByCreationTeamId(teamId);
     }
 
+    @GetMapping("/byteam/{teamId}")
+    public List<Event> getEventByTeamId(@PathVariable int teamId){
+        return eventService.getByTeamId(teamId);
+    }
+
+
+
     @GetMapping("/filter")
     public List<Event> getEventWithFilter(@RequestBody EventFilter eventFilter){
         return eventService.getWithFilter(eventFilter);

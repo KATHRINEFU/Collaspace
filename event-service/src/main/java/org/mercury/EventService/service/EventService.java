@@ -268,4 +268,19 @@ public class EventService {
         if(teamOptional.isEmpty()) {return null;}
         else return eventDao.findEventByTeam(teamOptional.get());
     }
+
+    public List<Event> getByTeamId(int teamId) {
+        // get team events: created by this team, involve this team
+        List<Event> allEvents;
+        Team team = teamDao.findById(teamId).orElse(null);
+        if(team==null) {return null;}
+        else allEvents = new ArrayList<>(eventDao.findEventByTeam(team));
+
+        List<EventCollaboration> collaborations = eventCollaborationDao.findAllByTeam(team);
+        for(EventCollaboration c: collaborations){
+            allEvents.add(c.getEvent());
+        }
+
+        return allEvents;
+    }
 }

@@ -15,16 +15,19 @@ public class Announcement {
     private int announcementId;
     private Team team;
     private int announcementCreator;
+
+    private String announcementCreatorName;
     private Date announcementCreationdate;
     private String announcementContent;
 
     public Announcement() {
     }
 
-    public Announcement(int announcementId, Team team, int announcementCreator, Date announcementCreationdate, String announcementContent) {
+    public Announcement(int announcementId, Team team, int announcementCreator,String announcementCreatorName, Date announcementCreationdate, String announcementContent) {
         this.announcementId = announcementId;
         this.team = team;
         this.announcementCreator = announcementCreator;
+        this.announcementCreatorName =  announcementCreatorName;
         this.announcementCreationdate = announcementCreationdate;
         this.announcementContent = announcementContent;
     }
@@ -42,6 +45,10 @@ public class Announcement {
         return announcementCreator;
     }
 
+    public String getAnnouncementCreatorName() {
+        return announcementCreatorName;
+    }
+
     public Date getAnnouncementCreationdate() {
         return announcementCreationdate;
     }
@@ -52,6 +59,10 @@ public class Announcement {
 
     public void setAnnouncementId(int announcementId) {
         this.announcementId = announcementId;
+    }
+
+    public void setAnnouncementCreatorName(String announcementCreatorName) {
+        this.announcementCreatorName = announcementCreatorName;
     }
 
     public void setTeam(Team team) {
@@ -68,5 +79,16 @@ public class Announcement {
 
     public void setAnnouncementContent(String announcementContent) {
         this.announcementContent = announcementContent;
+    }
+
+    @Override
+    public String toString() {
+        return "Announcement{" +
+                "announcementId=" + announcementId +
+                ", announcementCreator=" + announcementCreator +
+                ", announcementCreatorName='" + announcementCreatorName + '\'' +
+                ", announcementCreationdate=" + announcementCreationdate +
+                ", announcementContent='" + announcementContent + '\'' +
+                '}';
     }
 }

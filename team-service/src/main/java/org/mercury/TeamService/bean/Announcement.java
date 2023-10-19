@@ -88,4 +88,14 @@ public class Announcement {
     public void setAnnouncementContent(String announcementContent) {
         this.announcementContent = announcementContent;
     }
+
+    @Override
+    public String toString() {
+        return "Announcement{" +
+                "announcementId=" + announcementId +
+                ", announcementCreator=" + announcementCreator +
+                ", announcementCreationdate=" + announcementCreationdate +
+                ", announcementContent='" + announcementContent + '\'' +
+                '}';
+    }
 }

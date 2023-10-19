@@ -41,6 +41,7 @@ public class GetEmployeeTeamsListener {
         if(!teamMemberList.isEmpty()){
             for(TeamMember teamMember : teamMemberList){
                 teamList.add(teamMember.getTeam());
+                System.out.println(teamMember.getTeam().getAnnouncements());
             }
         }
         EmployeeGetTeamsReturn teamsReturn = new EmployeeGetTeamsReturn(teamList);
