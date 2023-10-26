@@ -27,7 +27,12 @@ public class TicketController {
         return ticketService.getById(id);
     }
 
-    @GetMapping("employee/{id}")
+    @GetMapping("creator/{id}")
+    public List<Ticket> getTicketsByCreatorId(@PathVariable int id){
+        return ticketService.getByCreatorId(id);
+    }
+
+    @GetMapping("/employee/{id}")
     public List<Ticket> getTicketsByEmployeeId(@PathVariable int id){
         return ticketService.getByEmployeeId(id);
     }

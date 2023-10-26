@@ -4,20 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added getting for account-company data">
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added getting for events by team">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErrorLog.md" beforeDir="false" afterPath="$PROJECT_DIR$/ErrorLog.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Announcement.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Announcement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/EventServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/EventServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/bean/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/bean/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/bean/EventCollaboration.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/bean/EventCollaboration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/controller/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/controller/EventController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/dao/EventCollaborationDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/dao/EventCollaborationDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/service/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/service/EventService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/bean/Announcement.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/bean/Announcement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/listener/GetEmployeeTeamsListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/listener/GetEmployeeTeamsListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/TicketServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/TicketServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/TicketAssign.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/bean/TicketAssign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/controller/TicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/controller/TicketController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dao/TicketAssignDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dao/TicketAssignDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +224,9 @@
       <workItem from="1696174107370" duration="29051000" />
       <workItem from="1697410845568" duration="2493000" />
       <workItem from="1697417336693" duration="13734000" />
-      <workItem from="1697551353523" duration="11923000" />
+      <workItem from="1697551353523" duration="15310000" />
+      <workItem from="1698024258921" duration="6368000" />
+      <workItem from="1698095298561" duration="1872000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -385,7 +382,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697636419709</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="added getting for events by team">
+      <created>1697730420893</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1697730420893</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -437,6 +441,7 @@
     <MESSAGE value="added getting for employee team data" />
     <MESSAGE value="added getting for all team service data" />
     <MESSAGE value="added getting for account-company data" />
-    <option name="LAST_COMMIT_MESSAGE" value="added getting for account-company data" />
+    <MESSAGE value="added getting for events by team" />
+    <option name="LAST_COMMIT_MESSAGE" value="added getting for events by team" />
   </component>
 </project>

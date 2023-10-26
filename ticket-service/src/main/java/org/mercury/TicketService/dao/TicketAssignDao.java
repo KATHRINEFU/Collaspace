@@ -3,6 +3,8 @@ package org.mercury.TicketService.dao;
 import org.mercury.TicketService.bean.TicketAssign;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * @ClassName TicketAssignDao
  * @Description TODO
@@ -11,6 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Version 1.0
  **/
 public interface TicketAssignDao extends JpaRepository<TicketAssign, Integer> {
-
+    List<TicketAssign> findByEmployeeId(int id);
 
 }

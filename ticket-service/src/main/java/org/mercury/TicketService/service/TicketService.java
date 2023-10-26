@@ -39,7 +39,7 @@ public class TicketService {
         return optionalTicket.orElse(null);
     }
 
-    public List<Ticket> getByEmployeeId(int id){
+    public List<Ticket> getByCreatorId(int id){
         return ticketDao.findByTicketCreator(id);
     }
 
@@ -127,5 +127,19 @@ public class TicketService {
             System.out.println(e.getMessage());
             return new Response(false);
         }
+    }
+
+    public List<Ticket> getByEmployeeId(int id) {
+        // all tickets: created by, assigned to
+        List<Ticket> allTickets;
+        allTickets = new ArrayList<>(ticketDao.findByTicketCreator(id));
+        List<TicketAssign> ticketAssigns = ticketAssignDao.findByEmployeeId(id);
+        if(ticketAssigns== null || ticketAssigns.isEmpty()) return allTickets;
+        for(TicketAssign ticketAssign : ticketAssigns){
+            allTickets.add( ticketAssign.getTicket());
+        }
+
+        return allTickets;
+
     }
 }

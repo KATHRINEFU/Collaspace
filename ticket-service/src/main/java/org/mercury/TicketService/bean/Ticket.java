@@ -38,6 +38,15 @@ public class Ticket {
     @Column
     private String ticketStatus;
 
+    @Column
+    private Integer ticketPriority;
+
+    @Column
+    private Integer ticketFromTeam;
+
+    @Column
+    private Date ticketDuedate;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "ticket")
     private List<TicketAssign> assigns;
 
