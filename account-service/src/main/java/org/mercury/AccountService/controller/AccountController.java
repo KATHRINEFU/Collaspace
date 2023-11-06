@@ -2,6 +2,7 @@ package org.mercury.AccountService.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.ws.rs.Path;
 import org.mercury.AccountService.bean.Account;
 import org.mercury.AccountService.dto.AccountEditRequest;
 import org.mercury.AccountService.dto.AccountRequest;
@@ -39,6 +40,11 @@ public class AccountController {
     @GetMapping("/{id}")
     public  Account getAccountById(@PathVariable int id){
         return accountService.getAccountById(id);
+    }
+
+    @GetMapping("/bydepartment/{id}")
+    public List<Account> getAccountsByDepartmentId(@PathVariable int id){
+        return accountService.getByDepartmentId(id);
     }
 
     @GetMapping("/withcompany/{id}")

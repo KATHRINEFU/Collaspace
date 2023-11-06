@@ -143,4 +143,8 @@ public class AccountService {
 
         return accountDao.save(accountFromDB);
     }
+
+    public List<Account> getByDepartmentId(int departmentId) {
+        return accountDao.findByAccountCurrentResponsibleDepartmentId(departmentId);
+    }
 }

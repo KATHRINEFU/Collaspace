@@ -2,11 +2,13 @@ package org.mercury.EmployeeService.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.mercury.EmployeeService.bean.Client;
+import org.mercury.EmployeeService.bean.Department;
 import org.mercury.EmployeeService.bean.Employee;
 import org.mercury.EmployeeService.bean.Team;
 import org.mercury.EmployeeService.dto.EmployeeDashboard;
 import org.mercury.EmployeeService.dto.EmployeeRegistration;
 import org.mercury.EmployeeService.filter.EmployeeFilter;
+import org.mercury.EmployeeService.service.DepartmentService;
 import org.mercury.EmployeeService.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +34,9 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private DepartmentService departmentService;
+
     @GetMapping("/all")
     public List<Employee> getAll(){
 
@@ -41,6 +46,11 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public Employee getEmployeeById(@PathVariable int id){
         return employeeService.getById(id);
+    }
+
+    @GetMapping("/department/{id}")
+    public Department getDepartmentById(@PathVariable int id){
+        return departmentService.getById(id);
     }
 
     @GetMapping("/filter")
