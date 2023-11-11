@@ -31,6 +31,11 @@ public class AnnouncementController {
         return announcementService.getByTeamId(teamId);
     }
 
+    @GetMapping("/sevendays/byteam/{teamId}")
+    public List<Announcement> getAnnouncementInSevenDaysByTeam(@PathVariable int teamId){
+        return announcementService.getInSevenDaysByTeamId(teamId);
+    }
+
     @GetMapping("/{id}")
     public Announcement getAnnouncementById(@PathVariable int id){
         return announcementService.getById(id);

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -64,5 +65,23 @@ public class AnnouncementService {
         announcementFromDB.setAnnouncementContent(announcementFromDB.getAnnouncementContent());
 
         return announcementDao.save(announcementFromDB);
+    }
+
+    public List<Announcement> getInSevenDaysByTeamId(int teamId) {
+        Date currentDate = new Date();
+
+        // Calculate the date seven days ago
+        Calendar sevenDaysAgo = Calendar.getInstance();
+        sevenDaysAgo.setTime(currentDate);
+        sevenDaysAgo.add(Calendar.DAY_OF_MONTH, -7);
+
+        // Retrieve announcements for the given team with creation dates in the past seven days
+        Team team = teamDao.findById(teamId).orElse(null);
+        if(team==null) return null;
+
+
+        return announcementDao.findAllByTeamAndAnnouncementCreationdateGreaterThanEqual(
+                team, sevenDaysAgo.getTime());
+
     }
 }
