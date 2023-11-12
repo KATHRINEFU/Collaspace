@@ -1,5 +1,6 @@
 package org.mercury.TeamService.dao;
 
+import org.mercury.TeamService.bean.Team;
 import org.mercury.TeamService.bean.TeamMember;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -14,4 +15,5 @@ import java.util.List;
  **/
 public interface TeamMemberDao extends JpaRepository<TeamMember, Integer> {
     List<TeamMember> findAllByEmployeeId(int employeeId);
+    List<TeamMember> findAllByTeam(Team team);
 }

@@ -46,4 +46,6 @@ public class Employee {
     private String employeeRole;
     @Column
     private Integer employeeManager;
+    @Column
+    private String employeeProfileUrl;
 }

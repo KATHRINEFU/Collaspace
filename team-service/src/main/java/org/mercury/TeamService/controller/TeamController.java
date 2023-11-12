@@ -1,6 +1,9 @@
 package org.mercury.TeamService.controller;
 
+import jakarta.ws.rs.Path;
+import org.mercury.TeamService.bean.Employee;
 import org.mercury.TeamService.bean.Team;
+import org.mercury.TeamService.dto.TeamMemberDto;
 import org.mercury.TeamService.dto.TeamRequest;
 import org.mercury.TeamService.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @ClassName TeamController
@@ -31,6 +35,11 @@ public class TeamController {
     @GetMapping("/{id}")
     public Team getTeamById(@PathVariable int id){
         return teamService.getById(id);
+    }
+
+    @GetMapping("/members/{id}")
+    public CompletableFuture<List<TeamMemberDto>> getTeamMembers(@PathVariable int id){
+        return teamService.getMembersByTeamId(id);
     }
 
     @PostMapping("/create")

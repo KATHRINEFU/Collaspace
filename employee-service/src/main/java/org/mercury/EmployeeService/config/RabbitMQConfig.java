@@ -1,6 +1,7 @@
 package org.mercury.EmployeeService.config;
 
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -27,6 +28,11 @@ public class RabbitMQConfig {
     }
 
     @Bean
+    public Queue createReturnEmployeeQueue() {
+        return new Queue("q.return-employee");
+    }
+
+    @Bean
     public Jackson2JsonMessageConverter converter(){
         return new Jackson2JsonMessageConverter();
     }
@@ -37,6 +43,5 @@ public class RabbitMQConfig {
         template.setMessageConverter(converter);
         return template;
     }
-
 
 }

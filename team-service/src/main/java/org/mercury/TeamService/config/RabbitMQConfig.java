@@ -27,6 +27,11 @@ public class RabbitMQConfig {
     }
 
     @Bean
+    public Queue createGetEmployeeQueue(){
+        return new Queue("q.get-employee");
+    }
+
+    @Bean
     public Jackson2JsonMessageConverter converter(){
         return new Jackson2JsonMessageConverter();
     }
