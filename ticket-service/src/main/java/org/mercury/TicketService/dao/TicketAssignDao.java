@@ -15,4 +15,6 @@ import java.util.List;
 public interface TicketAssignDao extends JpaRepository<TicketAssign, Integer> {
     List<TicketAssign> findByEmployeeId(int id);
 
+    List<TicketAssign> findByTeamId(int id);
+
 }

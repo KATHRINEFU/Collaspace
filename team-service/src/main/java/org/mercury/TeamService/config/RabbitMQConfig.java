@@ -32,6 +32,11 @@ public class RabbitMQConfig {
     }
 
     @Bean
+    public Queue createGetAccountQueue(){
+        return new Queue("q.get-account");
+    }
+
+    @Bean
     public Jackson2JsonMessageConverter converter(){
         return new Jackson2JsonMessageConverter();
     }

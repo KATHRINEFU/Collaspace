@@ -142,4 +142,16 @@ public class TicketService {
         return allTickets;
 
     }
+
+    public List<Ticket> getByTeamId(int teamId) {
+        List<Ticket> allTickets;
+        allTickets = new ArrayList<>(ticketDao.findByTicketFromTeam(teamId));
+        List<TicketAssign> ticketAssigns = ticketAssignDao.findByTeamId(teamId);
+        if(ticketAssigns== null || ticketAssigns.isEmpty()) return allTickets;
+        for(TicketAssign ticketAssign : ticketAssigns){
+            allTickets.add( ticketAssign.getTicket());
+        }
+
+        return allTickets;
+    }
 }

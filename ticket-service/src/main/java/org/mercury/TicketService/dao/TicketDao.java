@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface TicketDao extends JpaRepository<Ticket, Integer>, JpaSpecificationExecutor<Ticket> {
     public List<Ticket> findByTicketCreator(int employeeId);
+    List<Ticket> findByTicketFromTeam(int teamId);
 }

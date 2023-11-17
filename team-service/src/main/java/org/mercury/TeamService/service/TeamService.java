@@ -3,25 +3,17 @@ package org.mercury.TeamService.service;
 import lombok.extern.slf4j.Slf4j;
 import org.mercury.TeamService.bean.Employee;
 import org.mercury.TeamService.bean.Team;
+import org.mercury.TeamService.bean.TeamAccount;
 import org.mercury.TeamService.bean.TeamMember;
+import org.mercury.TeamService.dao.TeamAccountDao;
 import org.mercury.TeamService.dao.TeamDao;
 import org.mercury.TeamService.dao.TeamMemberDao;
-import org.mercury.TeamService.dto.EmployeeGetTeamsReturn;
+import org.mercury.TeamService.bean.Account;
 import org.mercury.TeamService.dto.TeamMemberDto;
 import org.mercury.TeamService.dto.TeamRequest;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
-import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
-import org.springframework.amqp.support.AmqpHeaders;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.messaging.handler.annotation.Header;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -51,9 +43,13 @@ public class TeamService {
     private TeamMemberDao teamMemberDao;
 
     @Autowired
+    private TeamAccountDao teamAccountDao;
+
+    @Autowired
     private RabbitTemplate rabbitTemplate;
 
     private final Map<Integer, CompletableFuture<Employee>> employeeIdToFutures = new ConcurrentHashMap<>();
+    private final Map<Integer, CompletableFuture<Account>> accountIdToFutures = new ConcurrentHashMap<>();
 
 
     public List<Team> getAll() {
@@ -155,6 +151,44 @@ public class TeamService {
         return CompletableFuture.allOf(memberFutures.toArray(new CompletableFuture[0]))
                 .thenApply(voidResult ->
                         memberFutures.stream()
+                                .map(future -> future.exceptionally(e -> null)) // Handle exceptions by returning null
+                                .map(CompletableFuture::join)
+                                .filter(Objects::nonNull) // Filter out null results
+                                .collect(Collectors.toList()));
+    }
+
+    @RabbitListener(queues = "q.return-account")
+    public void onListenReturnAccount(Account account) {
+        log.info("Return-Account message received: {}", account);
+        int accountId = account.getAccountId();
+        CompletableFuture<Account> accountFuture = accountIdToFutures.get(accountId);
+
+        if (accountFuture != null) {
+            accountFuture.complete(account);
+        } else {
+            log.warn("No corresponding CompletableFuture found for employeeId: {}", accountId );
+        }
+    }
+
+    public CompletableFuture<List<Account>> getAccountsByTeamId(int teamId) {
+        Team team = teamDao.findById(teamId).orElse(null);
+        if(team == null) return CompletableFuture.completedFuture(null);
+        List<TeamAccount> accounts= teamAccountDao.findAllByTeam(team);
+        if(accounts==null || accounts.isEmpty()) return CompletableFuture.completedFuture(null);
+
+        List<CompletableFuture<Account>> accountFutures = new ArrayList<>();
+        for(TeamAccount account : accounts){
+            CompletableFuture<Account> accountFuture = new CompletableFuture<>();
+            int accountId = account.getAccountId();
+            accountIdToFutures.put(accountId, accountFuture);
+
+            rabbitTemplate.convertAndSend("", "q.get-account", accountId);
+            accountFutures.add(accountFuture);
+        }
+
+        return CompletableFuture.allOf(accountFutures.toArray(new CompletableFuture[0]))
+                .thenApply(voidResult ->
+                        accountFutures.stream()
                                 .map(future -> future.exceptionally(e -> null)) // Handle exceptions by returning null
                                 .map(CompletableFuture::join)
                                 .filter(Objects::nonNull) // Filter out null results

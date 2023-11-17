@@ -22,6 +22,11 @@ public class RabbitMQConfig {
     private CachingConnectionFactory cachingConnectionFactory;
 
     @Bean
+    public Queue createReturnAccountQueue() {
+        return new Queue("q.return-account");
+    }
+
+    @Bean
     public Queue createGetEmployeeTeamsQueue() {
         return new Queue("q.get-account-company");
     }

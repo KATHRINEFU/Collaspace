@@ -4,17 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added getting recent announcement">
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/listener/GetEmployeeListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/bean/Employee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/TeamMemberDto.java" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added getting team members">
+      <change afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/GetAccountListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/bean/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/bean/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/config/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/config/RabbitMQConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/config/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/config/RabbitMQConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/config/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/config/RabbitMQConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/TeamController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dao/TeamMemberDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dao/TeamMemberDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dao/TeamAccountDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dao/TeamAccountDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/TeamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/TeamService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/controller/TicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/controller/TicketController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dao/TicketAssignDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dao/TicketAssignDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dao/TicketDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dao/TicketDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,7 +233,9 @@
       <workItem from="1698095298561" duration="4551000" />
       <workItem from="1698605608722" duration="12360000" />
       <workItem from="1699325545007" duration="3575000" />
-      <workItem from="1699661166290" duration="18806000" />
+      <workItem from="1699661166290" duration="26201000" />
+      <workItem from="1700168135314" duration="2925000" />
+      <workItem from="1700197731521" duration="5048000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -415,7 +419,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699673860279</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="added getting team members">
+      <created>1699812019494</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1699812019494</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -445,7 +456,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added employee getall pipeline" />
     <MESSAGE value="added api for employee filter" />
     <MESSAGE value="added api for ticket" />
     <MESSAGE value="added api for ticket assign" />
@@ -470,6 +480,7 @@
     <MESSAGE value="added getting for tickets by employee" />
     <MESSAGE value="added getting client, database doc" />
     <MESSAGE value="added getting recent announcement" />
-    <option name="LAST_COMMIT_MESSAGE" value="added getting recent announcement" />
+    <MESSAGE value="added getting team members" />
+    <option name="LAST_COMMIT_MESSAGE" value="added getting team members" />
   </component>
 </project>

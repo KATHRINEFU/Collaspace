@@ -1,8 +1,7 @@
 package org.mercury.TeamService.controller;
 
-import jakarta.ws.rs.Path;
-import org.mercury.TeamService.bean.Employee;
 import org.mercury.TeamService.bean.Team;
+import org.mercury.TeamService.bean.Account;
 import org.mercury.TeamService.dto.TeamMemberDto;
 import org.mercury.TeamService.dto.TeamRequest;
 import org.mercury.TeamService.service.TeamService;
@@ -40,6 +39,11 @@ public class TeamController {
     @GetMapping("/members/{id}")
     public CompletableFuture<List<TeamMemberDto>> getTeamMembers(@PathVariable int id){
         return teamService.getMembersByTeamId(id);
+    }
+
+    @GetMapping("/accounts/{id}")
+    public CompletableFuture<List<Account>> getTeamAccounts(@PathVariable int id){
+        return teamService.getAccountsByTeamId(id);
     }
 
     @PostMapping("/create")

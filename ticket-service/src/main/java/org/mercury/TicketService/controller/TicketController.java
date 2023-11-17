@@ -37,6 +37,11 @@ public class TicketController {
         return ticketService.getByEmployeeId(id);
     }
 
+    @GetMapping("/team/{id}")
+    public List<Ticket> getTicketsByTeamId(@PathVariable int id){
+        return ticketService.getByTeamId(id);
+    }
+
     @GetMapping("/filter")
     public List<Ticket> getTicketsWithFilter(TicketFilter ticketFilter){
         return ticketService.getWithFilter(ticketFilter);
