@@ -78,6 +78,7 @@ public class EmployeeController {
 //    }
 
     @PostMapping("/create")
+    @CrossOrigin(origins = "http://localhost:5174", allowedHeaders = "*", exposedHeaders = "If-Match")
     public ResponseEntity<String> addEmployee(@RequestBody EmployeeRegistration employeeRegistration) {
         System.out.println("Received request for creating employee");
         log.info("Received request for creating employee");

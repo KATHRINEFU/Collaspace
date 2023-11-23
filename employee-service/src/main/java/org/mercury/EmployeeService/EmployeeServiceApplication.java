@@ -28,19 +28,20 @@ public class EmployeeServiceApplication {
         SpringApplication.run(EmployeeServiceApplication.class, args);
     }
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5174")
-                        .allowedMethods("*")
-                        .allowedHeaders("Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
-                                "Access-Control-Request-Headers", "Access-Control-Allow-Origin")
-                        .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
-                        .allowCredentials(true).maxAge(3600);
-            }
-        };
-    }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**")
+//                        .allowedOrigins("http://localhost:5174")
+//                        .allowedMethods("*")
+//                        .allowedHeaders("Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
+//                                "Access-Control-Request-Headers", "Access-Control-Allow-Origin")
+//                        .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
+//                        .allowCredentials(true).maxAge(3600)
+//                ;
+//            }
+//        };
+//    }
 }

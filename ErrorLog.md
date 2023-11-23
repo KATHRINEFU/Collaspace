@@ -30,7 +30,8 @@
       SimpleDateFormat dateFormat = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
     dateFormat.parse(dateStr);
     - if getValue() is Date, just (Date)getValue()
-
+- reset sequence: ALTER SEQUENCE product_id_seq RESTART WITH 1453
+- delete foreign key: ALTER TABLE table_name DROP CONSTRAINT foreign_key_name;
 ## MVC
 - Ticket and TicketAssign(contains ticket, and other fields, many-to-one relationship with Ticket), when save a ticket and its multiple TicketAssigns
   - Q: do I need to separately save for ticketAssign?
@@ -123,7 +124,8 @@
           return HttpClient.create().resolver(DefaultAddressResolverGroup.INSTANCE);
       }
       ```
-
+ - Rewrote request path to system path:
+   do not use the RewritePath=/employee/(?<path>.*), /$\{path} for swagger
 ### Spring Security
 - SecurityFilterChain methods deprecated: csrf, requestMatchers ...
 ```java
