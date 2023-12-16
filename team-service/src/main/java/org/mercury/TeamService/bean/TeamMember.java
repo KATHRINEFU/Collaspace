@@ -48,6 +48,17 @@ public class TeamMember {
         this.role = role;
     }
 
+    @Override
+    public String toString() {
+        return "TeamMember{" +
+                "teamMemberId=" + teamMemberId +
+                ", team=" + team +
+                ", employeeId=" + employeeId +
+                ", joindate=" + joindate +
+                ", role='" + role + '\'' +
+                '}';
+    }
+
     public int getTeamMemberId() {
         return teamMemberId;
     }

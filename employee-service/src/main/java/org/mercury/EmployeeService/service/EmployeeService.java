@@ -15,10 +15,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -39,6 +36,9 @@ public class EmployeeService {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private EmailService emailService;
 
     private CompletableFuture<List<Team>> teamsFuture;
 
@@ -65,6 +65,13 @@ public class EmployeeService {
         List<Department> departments = departmentDao.findAllByDepartmentName(employeeRegistration.getDepartment());
         employee.setDepartmentId(departments.get(0).getDepartmentId());
         //TODO: register in AuthService
+        Map<String, String> placeholders = new HashMap<>();
+        placeholders.put("name", employee.getEmployeeFirstname() + " " + employee.getEmployeeLastname());
+        placeholders.put("action_url", "http://localhost:5174");
+        placeholders.put("support_email", "yuehaofu207@gmail.com");
+        emailService.sendEmail(employee.getEmployeeEmail(),
+                "CollaSpace | Registration Confirmation",
+                placeholders);
         return employeeDao.save(employee);
     }
 

@@ -48,6 +48,9 @@ public class TeamService {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    @Autowired
+    private EmailService emailService;
+
     private final Map<Integer, CompletableFuture<Employee>> employeeIdToFutures = new ConcurrentHashMap<>();
     private final Map<Integer, CompletableFuture<Account>> accountIdToFutures = new ConcurrentHashMap<>();
 
@@ -68,8 +71,29 @@ public class TeamService {
         team.setTeamCreator(teamRequest.getTeamCreator());
         team.setTeamCreationdate(new Date());
         team.setTeamDescription(teamRequest.getTeamDescription());
-        team.setTeamType(teamRequest.getTeamType());
+        StringBuilder sb = new StringBuilder();
+        for(String type: teamRequest.getTeamTypes()){
+            sb.append(type);
+            sb.append(",");
+        }
+        team.setTeamType(sb.toString());
+        inviteTeamMember(team.getTeamName(), teamRequest.getMembers());
         return teamDao.save(team);
+    }
+
+    private void inviteTeamMember(String teamName, List<Employee> members){
+        for(Employee member: members){
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("name", member.getEmployeeFirstname() + " " + member.getEmployeeLastname());
+            placeholders.put("team_name", teamName);
+            placeholders.put("action_url", "http://localhost:5174/user/dashboard");
+            placeholders.put("support_email", "yuehaofu207@gmail.com");
+            emailService.sendEmail(
+                    "invite",
+                    member.getEmployeeEmail(),
+                    "CollaSpace | Team Invitation",
+                    placeholders);
+        }
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
@@ -81,7 +105,12 @@ public class TeamService {
         teamFromDB = optionalTeam.get();
         teamFromDB.setTeamName(teamRequest.getTeamName());
         teamFromDB.setTeamDescription(teamRequest.getTeamDescription());
-        teamFromDB.setTeamType(teamRequest.getTeamType());
+        StringBuilder sb = new StringBuilder();
+        for(String type: teamRequest.getTeamTypes()){
+            sb.append(type);
+            sb.append(",");
+        }
+        teamFromDB.setTeamType(sb.toString());
         return teamDao.save(teamFromDB);
     }
 

@@ -1,5 +1,6 @@
 package org.mercury.EventService.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.mercury.EventService.bean.*;
 import org.mercury.EventService.criteria.SearchCriteria;
 import org.mercury.EventService.dao.*;
@@ -13,11 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @ClassName EventService
@@ -28,6 +27,7 @@ import java.util.Optional;
  **/
 
 @Service
+@Slf4j
 public class EventService {
     @Autowired
     private EventDao eventDao;
@@ -40,6 +40,18 @@ public class EventService {
 
     @Autowired
     private ActivityEventDao activityEventDao;
+
+    private final WebClient webClient;
+
+    @Autowired
+    private TeamMemberDao teamMemberDao;
+
+    @Autowired
+    private EmailService emailService;
+
+    public EventService(){
+        this.webClient = WebClient.create("http://localhost:8080/employee/");
+    }
 
     @Autowired
     private TeamDao teamDao;
@@ -122,6 +134,27 @@ public class EventService {
                 if (invitedTeamOptional.isPresent()) {
                     Team invitedTeam = invitedTeamOptional.get();
 
+                    //TODO: team's creator and supervisor will receive an email
+                    List<TeamMember> teamMembers = teamMemberDao.findAllByTeamTeamId(invitedTeam.getTeamId());
+                    List<Employee> employees = new ArrayList<>();
+
+                    for(TeamMember member: teamMembers){
+                        if(member.getRole().equals("owner") || member.getRole().equals("supervisor")){
+                            Employee employee = webClient.get()
+                                    .uri("/{id}", member.getEmployeeId())
+                                    .retrieve()
+                                    .bodyToMono(Employee.class)
+                                    .block(); // This makes the call synchronous
+                            if (employee != null) {
+                                employees.add(employee);
+                            }
+                        }
+
+                    }
+
+                    inviteEventMember(invitedTeam.getTeamName(), savedEvent.getEventTitle(), employees);
+
+
                     EventCollaboration eventCollaboration = new EventCollaboration();
                     eventCollaboration.setEvent(savedEvent);
                     eventCollaboration.setTeam(invitedTeam);
@@ -137,6 +170,22 @@ public class EventService {
         }
 
         return savedEvent;
+    }
+
+    private void inviteEventMember(String teamName, String eventName, List<Employee> members){
+        for(Employee member: members){
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("name", member.getEmployeeFirstname() + " " + member.getEmployeeLastname());
+            placeholders.put("team_name", teamName);
+            placeholders.put("event_name", eventName);
+            placeholders.put("action_url", "http://localhost:5174/user/dashboard");
+            placeholders.put("support_email", "yuehaofu207@gmail.com");
+            emailService.sendEmail(
+                    "invite",
+                    member.getEmployeeEmail(),
+                    "CollaSpace | Event Collaboration Invitation",
+                    placeholders);
+        }
     }
 
     public Event editEvent(int id, EventRequest editRequest) {

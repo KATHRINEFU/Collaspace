@@ -1,5 +1,6 @@
 package org.mercury.TicketService.service;
 
+import org.mercury.TicketService.bean.Employee;
 import org.mercury.TicketService.bean.Ticket;
 import org.mercury.TicketService.bean.TicketAssign;
 import org.mercury.TicketService.bean.TicketLog;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.*;
 
@@ -34,6 +36,15 @@ public class TicketService {
     @Autowired
     private TicketAssignDao ticketAssignDao;
 
+    @Autowired
+    private EmailService emailService;
+
+    private final WebClient webClient;
+
+    public TicketService(){
+        this.webClient = WebClient.create("http://localhost:8080/employee/");
+    }
+
     public Ticket getById(int id){
         Optional<Ticket> optionalTicket = ticketDao.findById(id);
         return optionalTicket.orElse(null);
@@ -47,10 +58,31 @@ public class TicketService {
     public Response addTicket(Ticket ticket){
         try{
             List<TicketAssign> assignRoles = ticket.getAssigns();
+            List<Employee> employees = new ArrayList<>();
             assignRoles.forEach((ticketAssign -> {
                 ticketAssign.setTicket(ticket);
                 // employeeId and role are already set
+
+                Employee employee = webClient.get()
+                        .uri("/{id}",ticketAssign.getEmployeeId())
+                        .retrieve()
+                        .bodyToMono(Employee.class)
+                        .block(); // This makes the call synchronous
+                if (employee != null) {
+                    employees.add(employee);
+                }
+
             }));
+
+            Employee creator = webClient.get()
+                    .uri("/{id}", ticket.getTicketCreator())
+                    .retrieve()
+                    .bodyToMono(Employee.class)
+                    .block();
+
+            assert creator != null;
+
+            inviteTicketMember(ticket.getTicketTitle(), creator.getEmployeeFirstname() + " "+ creator.getEmployeeLastname(), employees);
 
             // ticketlogs is null when passed in
             // is a log for creation necessary?
@@ -66,6 +98,23 @@ public class TicketService {
         }
 
 
+    }
+
+    private void inviteTicketMember(String ticketName, String creatorName, List<Employee> members){
+        for(Employee member: members){
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("name", member.getEmployeeFirstname() + " " + member.getEmployeeLastname());
+            placeholders.put("ticket_name", ticketName);
+            placeholders.put("creator_name", creatorName);
+
+            placeholders.put("action_url", "http://localhost:5174/user/dashboard");
+            placeholders.put("support_email", "yuehaofu207@gmail.com");
+            emailService.sendEmail(
+                    "invite",
+                    member.getEmployeeEmail(),
+                    "CollaSpace | Ticket Assign",
+                    placeholders);
+        }
     }
 
     public List<Ticket> getWithFilter(TicketFilter ticketFilter){
