@@ -35,6 +35,21 @@ public class ApiGatewayApplication {
         SpringApplication.run(ApiGatewayApplication.class, args);
     }
 
+//        @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry
+//                        .addMapping("/**")
+//                        .allowedOriginPatterns("*")
+//                        .allowedMethods("GET", "POST", "OPTIONS", "PUT")
+//                        .allowedHeaders("*")
+//                        .allowCredentials(true).maxAge(3600);
+//            }
+//        };
+//    }
+
     @Bean
     public HttpClient httpClient() {
         return HttpClient.create().resolver(DefaultAddressResolverGroup.INSTANCE);

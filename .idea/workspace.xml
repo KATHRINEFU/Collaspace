@@ -4,18 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added getting team accounts">
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="reconfigured api gateway, make auth service work">
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/config/CorsConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/CorsFilterConfiguration.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/config/MvcConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/config/WebSecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/config/CorsConfig.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/filter/MyCorsFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/filter/WebFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErrorLog.md" beforeDir="false" afterPath="$PROJECT_DIR$/ErrorLog.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/ApiGatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/ApiGatewayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/filter/AuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/filter/AuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/config/AppConfig.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/AuthConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/AuthConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/EmployeeServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/EmployeeServiceApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +33,7 @@
       <list>
         <option value="AnnotationType" />
         <option value="Interface" />
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -55,29 +62,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/katefu/Jobs/mercury/project/collaspace-parent/auth-service/src/main/resources&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;094eab5620557d08844d6b4d43383df2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "extract.method.default.visibility": "private",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "/Users/katefu/Jobs/mercury/project/collaspace-parent/api-gateway/src/main/java/org/mercury/ApiGateway/config",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "spring.configuration.checksum": "094eab5620557d08844d6b4d43383df2"
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -86,18 +94,18 @@
       <recent name="org.mercury.AccountService" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/auth-service/src/main/resources" />
-      <recent name="$PROJECT_DIR$/account-service/src/main/resources" />
-      <recent name="$PROJECT_DIR$/client-account-service/src/main/resources" />
-      <recent name="$PROJECT_DIR$/team-service/src/main/resources" />
+      <recent name="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/config" />
+      <recent name="$PROJECT_DIR$/ticket-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/event-service/src/main/resources" />
+      <recent name="$PROJECT_DIR$/team-service/src/main/resources" />
+      <recent name="$PROJECT_DIR$/auth-service/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.mercury.ClientService.config" />
-      <recent name="org.mercury.AccountService.config" />
-      <recent name="org.mercury.EmployeeService.dto" />
-      <recent name="org.mercury.TeamService.dto" />
-      <recent name="org.mercury.AccountService" />
+      <recent name="org.mercury.ApiGateway.config" />
+      <recent name="org.mercury.TicketService.bean" />
+      <recent name="org.mercury.TicketService.service" />
+      <recent name="org.mercury.EventService.service" />
+      <recent name="org.mercury.EventService.bean" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -108,12 +116,58 @@
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
-        <option value="SpringBootApplicationConfigurationType" />
         <option value="SwaggerCodegen" />
       </set>
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.EmployeeServiceApplication">
+    <configuration name="EmployeeServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mercury.EmployeeService.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.mercury.EmployeeService.service" />
+      <option name="MAIN_CLASS_NAME" value="com.mercury.EmployeeService.service.EmployeeServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmployeeServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.mercury.EmployeeService.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.mercury.EmployeeService.service" />
+      <option name="MAIN_CLASS_NAME" value="org.mercury.EmployeeService.service.EmployeeServiceTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmployeeServiceTest.getAllTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mercury.EmployeeService.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.mercury.EmployeeService.service" />
+      <option name="MAIN_CLASS_NAME" value="com.mercury.EmployeeService.service.EmployeeServiceTest" />
+      <option name="METHOD_NAME" value="getAllTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AccountServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
       <option name="ACTIVE_PROFILES" />
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
@@ -197,6 +251,9 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="JUnit.EmployeeServiceTest" />
+      <item itemvalue="JUnit.EmployeeServiceTest (1)" />
+      <item itemvalue="JUnit.EmployeeServiceTest.getAllTest" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.AuthServiceApplication" />
       <item itemvalue="Spring Boot.AccountServiceApplication" />
@@ -207,6 +264,13 @@
       <item itemvalue="Spring Boot.TeamServiceApplication" />
       <item itemvalue="Spring Boot.TicketServiceApplication" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.EmployeeServiceTest (1)" />
+        <item itemvalue="JUnit.EmployeeServiceTest" />
+        <item itemvalue="JUnit.EmployeeServiceTest.getAllTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -240,7 +304,11 @@
       <workItem from="1700599585058" duration="5760000" />
       <workItem from="1700684407427" duration="9598000" />
       <workItem from="1700710269582" duration="411000" />
-      <workItem from="1700713605945" duration="1423000" />
+      <workItem from="1700713605945" duration="8816000" />
+      <workItem from="1701878356865" duration="1456000" />
+      <workItem from="1702653820517" duration="6406000" />
+      <workItem from="1702667944564" duration="11005000" />
+      <workItem from="1702693512360" duration="8349000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -438,7 +506,21 @@
       <option name="project" value="LOCAL" />
       <updated>1700250314539</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="reconfigured api gateway, make auth service work">
+      <created>1700715229493</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1700715229493</updated>
+    </task>
+    <task id="LOCAL-00030" summary="reconfigured api gateway, make auth service work">
+      <created>1702693352516</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1702693352516</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -468,7 +550,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added api for ticket" />
     <MESSAGE value="added api for ticket assign" />
     <MESSAGE value="added api for ticket log, added DTO and Request Objects" />
     <MESSAGE value="added api for event" />
@@ -493,6 +574,7 @@
     <MESSAGE value="added getting recent announcement" />
     <MESSAGE value="added getting team members" />
     <MESSAGE value="added getting team accounts" />
-    <option name="LAST_COMMIT_MESSAGE" value="added getting team accounts" />
+    <MESSAGE value="reconfigured api gateway, make auth service work" />
+    <option name="LAST_COMMIT_MESSAGE" value="reconfigured api gateway, make auth service work" />
   </component>
 </project>

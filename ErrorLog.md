@@ -186,16 +186,39 @@ public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Excepti
    - completable future
  - if two request for company coming too close, it will receive the same company
 ## Frontend Connection
-- CORS enable: enable in actual service
-```java
-      @Bean
-      public WebMvcConfigurer corsConfigurer() {
-          return new WebMvcConfigurer() {
-              @Override
-              public void addCorsMappings(CorsRegistry registry) {
-                  registry.addMapping("/**").allowedOrigins("http://localhost:5174");
-              }
-          };
-      }
-   ```
-- Can get but post still not allowed
+   - Error: CORS block post request 
+     - Backend: enable in both service and api gateway
+       ```java
+         @Configuration
+         public class CorsConfig implements WebMvcConfigurer {
+
+           @Override
+           public void addCorsMappings(CorsRegistry registry) {
+               registry.addMapping("/**")
+                   .allowedOriginPatterns("*")
+                   .allowedMethods("GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS")
+                   .allowCredentials(true)
+                   .maxAge(3600)
+                   .allowedHeaders("*");
+
+           }
+         }
+     - Frontend: vite config
+     ```typescript
+          server: {
+            proxy: {
+              '/api': {
+              target: 'http://localhost:8080',
+              changeOrigin: true,
+              secure: false,
+              rewrite: (path) => path.replace(/^\/api/, '')
+            },
+          },
+
+
+## Frontend
+### AWS S3 connection
+  - Error: 'global not defined' when importing aws-sdk
+    - solution: because vite doesn't define a global field in window as webpack does. And some libraries relies on it since webpack is much older than vite.
+    Add a 'init.ts' under src containing: window.global ||= window;. Add importing this init.ts before importing aws-sdk.
+  - 

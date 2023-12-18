@@ -51,6 +51,7 @@ public class EmployeeService {
         return optionalEmployee.orElse(null);
     }
 
+
     public Employee register(EmployeeRegistration employeeRegistration){
         Employee employee = new Employee();
         employee.setEmployeeFirstname(employeeRegistration.getEmployeeFirstname());
@@ -119,12 +120,12 @@ public class EmployeeService {
         return employeeDao.findAll(finalSpecification);
     }
 
-    @RabbitListener(queues = {"q.return-employee-teams"})
-    public void onListenReturnEmployeeTeams(EmployeeGetTeamsReturn teamsReturn){
-        log.info("Return-Employee_Teams message received: {}", teamsReturn.getTeamList());
-        // TODO: how to add teamList to EmployeeDashboard in returnDashBoardData?
-        teamsFuture.complete(teamsReturn.getTeamList());
-    }
+//    @RabbitListener(queues = {"q.return-employee-teams"})
+//    public void onListenReturnEmployeeTeams(EmployeeGetTeamsReturn teamsReturn){
+//        log.info("Return-Employee_Teams message received: {}", teamsReturn.getTeamList());
+//        // TODO: how to add teamList to EmployeeDashboard in returnDashBoardData?
+//        teamsFuture.complete(teamsReturn.getTeamList());
+//    }
 
 
     public CompletableFuture<List<Team>> sendRequestForTeamsData(int id) {
