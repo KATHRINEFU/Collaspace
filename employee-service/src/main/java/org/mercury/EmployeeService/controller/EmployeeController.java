@@ -60,13 +60,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/teams/{id}")
-    public CompletableFuture<List<Team>> getEmployeeTeamsData(@PathVariable int id){
-        return employeeService.sendRequestForTeamsData(id)
-                .thenApply(teams -> {
-                    // Perform any additional processing if needed
-                    // This block executes when all services have responded
-                    return teams;
-                });
+    public List<Team> getEmployeeTeamsData(@PathVariable int id){
+        return employeeService.getEmployeeTeams(id);
     }
 
 //    @GetMapping("/clients/{id}")

@@ -36,6 +36,11 @@ public class TeamController {
         return teamService.getById(id);
     }
 
+    @GetMapping("/byemployee/{id}")
+    public List<Team> getTeamsByEmployeeId(@PathVariable int id){
+        return teamService.getByEmployeeId(id);
+    }
+
     @GetMapping("/members/{id}")
     public CompletableFuture<List<TeamMemberDto>> getTeamMembers(@PathVariable int id){
         return teamService.getMembersByTeamId(id);

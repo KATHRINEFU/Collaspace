@@ -11,12 +11,12 @@ import org.mercury.EmployeeService.specification.EmployeeSpecification;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * @ClassName EmployeeService
@@ -35,12 +35,14 @@ public class EmployeeService {
     private DepartmentDao departmentDao;
 
     @Autowired
-    private RabbitTemplate rabbitTemplate;
-
-    @Autowired
     private EmailService emailService;
 
-    private CompletableFuture<List<Team>> teamsFuture;
+    private final WebClient.Builder webClientBuilder;
+
+    @Autowired
+    public EmployeeService(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
+    }
 
     public List<Employee> getAll(){
         return employeeDao.findAll();
@@ -135,42 +137,13 @@ public class EmployeeService {
         return employeeDao.findAll(finalSpecification);
     }
 
-//    @RabbitListener(queues = {"q.return-employee-teams"})
-//    public void onListenReturnEmployeeTeams(EmployeeGetTeamsReturn teamsReturn){
-//        log.info("Return-Employee_Teams message received: {}", teamsReturn.getTeamList());
-//        // TODO: how to add teamList to EmployeeDashboard in returnDashBoardData?
-//        teamsFuture.complete(teamsReturn.getTeamList());
-//    }
+    public List<Team> getEmployeeTeams(int id) {
+        WebClient webClient = webClientBuilder.build();
 
-
-    public CompletableFuture<List<Team>> sendRequestForTeamsData(int id) {
-        // TODO: send requests to team services
-        List<Team> employeeTeams = new ArrayList<>();
-        List<CompletableFuture<List<Team>>> futures = new ArrayList<>();
-
-
-        teamsFuture = new CompletableFuture<>();
-        EmployeeGetTeamsRequest teamsRequest = new EmployeeGetTeamsRequest(id);
-        rabbitTemplate.convertAndSend("", "q.get-employee-teams", teamsRequest);
-        futures.add(teamsFuture);
-
-        CompletableFuture<Void> allOfFuture = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
-        return allOfFuture.thenApply(voidResult -> {
-            // Process the results from all services
-            for (CompletableFuture<List<Team>> future : futures) {
-                List<Team> teams = future.join(); // Get the result of each future
-                for(Team team: teams){
-                    for(Announcement announcement: team.getAnnouncements()){
-                        Employee announcementCreator = employeeDao.findById(announcement.getAnnouncementCreator()).orElse(null);
-                        if(announcementCreator!=null) announcement.setAnnouncementCreatorName(announcementCreator.getEmployeeFirstname() + " " + announcementCreator.getEmployeeLastname());
-                    }
-                    employeeTeams.add(team);
-//                    System.out.println(team.getTeamName());
-                }
-            }
-
-            return employeeTeams;
-        });
+        return webClient.get()
+                .uri("http://localhost:8080/team/byemployee/" + id)
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<List<Team>>() {})
+                .block();
     }
-
 }

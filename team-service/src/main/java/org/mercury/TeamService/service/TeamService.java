@@ -223,4 +223,16 @@ public class TeamService {
                                 .filter(Objects::nonNull) // Filter out null results
                                 .collect(Collectors.toList()));
     }
+
+    public List<Team> getByEmployeeId(int id) {
+        List<TeamMember> teamMemberList = teamMemberDao.findAllByEmployeeId(id);
+        List<Team> teamList = new ArrayList<>();
+        if(!teamMemberList.isEmpty()){
+            for(TeamMember teamMember : teamMemberList){
+                teamList.add(teamMember.getTeam());
+            }
+        }
+        log.info("Got teams by employee " + id + ": size of "+ teamList.size());
+        return teamList;
+    }
 }
