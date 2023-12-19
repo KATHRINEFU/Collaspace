@@ -30,10 +30,10 @@ public class EmailService {
         this.resourceLoader = resourceLoader;
     }
 
-    public void sendEmail(String to, String subject, Map<String, String> placeholders) {
+    public void sendEmail(String template, String to, String subject, Map<String, String> placeholders) {
 
         try {
-            String content = loadEmailTemplate();
+            String content = loadEmailTemplate(template);
             for (Map.Entry<String, String> entry : placeholders.entrySet()) {
                 content = content.replace("{{" + entry.getKey() + "}}", entry.getValue());
             }
@@ -51,9 +51,10 @@ public class EmailService {
         }
     }
 
-    private String loadEmailTemplate() throws IOException {
+    private String loadEmailTemplate(String template) throws IOException {
+        String location = "classpath:email-template-" + template + ".html";
         return StreamUtils.copyToString(
-                resourceLoader.getResource("classpath:email-template.html").getInputStream(),
+                resourceLoader.getResource(location).getInputStream(),
                 StandardCharsets.UTF_8
         );
     }

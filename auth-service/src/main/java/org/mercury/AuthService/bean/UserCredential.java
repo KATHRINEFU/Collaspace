@@ -31,4 +31,9 @@ public class UserCredential {
 
     @Column
     private String employeeEmail;
+
+    public UserCredential(String employeePassword, String employeeEmail) {
+        this.employeePassword = employeePassword;
+        this.employeeEmail = employeeEmail;
+    }
 }

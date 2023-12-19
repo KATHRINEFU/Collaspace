@@ -1,21 +1,20 @@
-package org.mercury.EmployeeService.dto;
+package org.mercury.AuthService.dto;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * @ClassName EmployeeRegistration
+ * @ClassName EmployeeRegistrationRequest
  * @Description TODO
  * @Author katefu
- * @Date 9/24/23 4:05 PM
+ * @Date 12/19/23 10:16 AM
  * @Version 1.0
  **/
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class EmployeeRegistration {
+public class EmployeeRegistrationRequest {
     private String employeeFirstname;
     private String employeeLastname;
     private String employeeEmail;
@@ -24,4 +23,5 @@ public class EmployeeRegistration {
     private String employeePhone;
     private String department;
     private String employeeRole;
+    private String employeePassword;
 }

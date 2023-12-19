@@ -4,15 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="fixed allow cross origin post request">
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/bean/UserLoginCredential.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/dto/TokenResponse.java" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="enabled verification for login">
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/RabbitMQConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/dto/EmployeeCreationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/dto/EmployeeRegistrationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/listener/CreateEmployeeListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/resources/email-template-success.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/bean/UserCredential.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/bean/UserCredential.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/config/CorsConfig.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/dto/AuthRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/dto/AuthRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dto/EmployeeRegistration.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dto/EmployeeRegistration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/src/main/resources/email-template.html" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/resources/email-template-error.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +71,7 @@
     "WebServerToolWindowFactoryState": "false",
     "extract.method.default.visibility": "private",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "/Users/katefu/Jobs/mercury/project/collaspace-parent/api-gateway/src/main/java/org/mercury/ApiGateway/config",
+    "last_opened_file_path": "/Users/katefu/Jobs/mercury/project/collaspace-parent/employee-service/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -85,11 +90,11 @@
       <recent name="org.mercury.AccountService" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/employee-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/config" />
       <recent name="$PROJECT_DIR$/ticket-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/event-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/team-service/src/main/resources" />
-      <recent name="$PROJECT_DIR$/auth-service/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.mercury.AuthService.config" />
@@ -300,7 +305,7 @@
       <workItem from="1701878356865" duration="1456000" />
       <workItem from="1702653820517" duration="6406000" />
       <workItem from="1702667944564" duration="11005000" />
-      <workItem from="1702693512360" duration="16926000" />
+      <workItem from="1702693512360" duration="22755000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -519,7 +524,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702864662937</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="enabled verification for login">
+      <created>1702955976399</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1702955976399</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -549,7 +561,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added api for ticket log, added DTO and Request Objects" />
     <MESSAGE value="added api for event" />
     <MESSAGE value="added api for adding event collaboration" />
     <MESSAGE value="added api for getting and editing event collaboration" />
@@ -574,6 +585,7 @@
     <MESSAGE value="added getting team accounts" />
     <MESSAGE value="reconfigured api gateway, make auth service work" />
     <MESSAGE value="fixed allow cross origin post request" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed allow cross origin post request" />
+    <MESSAGE value="enabled verification for login" />
+    <option name="LAST_COMMIT_MESSAGE" value="enabled verification for login" />
   </component>
 </project>

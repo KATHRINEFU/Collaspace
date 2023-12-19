@@ -62,18 +62,33 @@ public class EmployeeService {
         employee.setEmployeeRole(employeeRegistration.getEmployeeRole());
         employee.setEmployeePhone(employeeRegistration.getEmployeePhone());
         employee.setEmployeeStartdate(new Date());
+        try{
+            List<Department> departments = departmentDao.findAllByDepartmentName(employeeRegistration.getDepartment());
+            employee.setDepartmentId(departments.get(0).getDepartmentId());
 
-        List<Department> departments = departmentDao.findAllByDepartmentName(employeeRegistration.getDepartment());
-        employee.setDepartmentId(departments.get(0).getDepartmentId());
-        //TODO: register in AuthService
-        Map<String, String> placeholders = new HashMap<>();
-        placeholders.put("name", employee.getEmployeeFirstname() + " " + employee.getEmployeeLastname());
-        placeholders.put("action_url", "http://localhost:5174");
-        placeholders.put("support_email", "yuehaofu207@gmail.com");
-        emailService.sendEmail(employee.getEmployeeEmail(),
-                "CollaSpace | Registration Confirmation",
-                placeholders);
-        return employeeDao.save(employee);
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("name", employee.getEmployeeFirstname() + " " + employee.getEmployeeLastname());
+            placeholders.put("action_url", "http://localhost:5174");
+            placeholders.put("support_email", "yuehaofu207@gmail.com");
+            emailService.sendEmail(
+                    "success",
+                    employee.getEmployeeEmail(),
+                    "CollaSpace | Registration Confirmation",
+                    placeholders);
+            return employeeDao.save(employee);
+        }catch (Exception e){
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("name", employee.getEmployeeFirstname() + " " + employee.getEmployeeLastname());
+            placeholders.put("error_message", e.getMessage());
+            placeholders.put("action_url", "http://localhost:5174");
+            placeholders.put("support_email", "yuehaofu207@gmail.com");
+            emailService.sendEmail(
+                    "error",
+                    employee.getEmployeeEmail(),
+                    "CollaSpace | Registration Confirmation",
+                    placeholders);
+            return null;
+        }
     }
 
     public List<Employee> getWithFilter(EmployeeFilter employeeFilter){

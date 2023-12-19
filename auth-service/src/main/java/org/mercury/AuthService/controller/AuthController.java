@@ -3,16 +3,16 @@ package org.mercury.AuthService.controller;
 import io.jsonwebtoken.JwtException;
 import org.mercury.AuthService.bean.UserCredential;
 import org.mercury.AuthService.bean.UserLoginCredential;
-import org.mercury.AuthService.dto.AuthRequest;
-import org.mercury.AuthService.dto.TokenResponse;
-import org.mercury.AuthService.dto.ValidationRequest;
+import org.mercury.AuthService.dto.*;
 import org.mercury.AuthService.service.AuthService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -34,18 +34,42 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @PostMapping("/register")
-    public ResponseEntity<String> addNewUser(@RequestBody UserCredential user) {
+    public TokenResponse addNewUser(@RequestBody EmployeeRegistrationRequest request) {
 
         try {
+            UserCredential user = new UserCredential(request.getEmployeePassword(), request.getEmployeeEmail());
             UserCredential addedUser = authService.saveUser(user);
             if (addedUser != null) {
-                return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully");
+                // TODO: async call to employee service create
+                EmployeeCreationRequest creationRequest = new EmployeeCreationRequest(
+                        request.getEmployeeFirstname(),
+                        request.getEmployeeLastname(),
+                        request.getEmployeeEmail(),
+                        request.getEmployeeLocationCountry(),
+                        request.getEmployeeLocationCity(),
+                        request.getEmployeePhone(),
+                        request.getDepartment(),
+                        request.getEmployeeRole()
+                );
+                rabbitTemplate.convertAndSend("", "q.create-employee", creationRequest);
+
+                String email = addedUser.getEmployeeEmail();
+                String token = authService.generateToken(email);
+                int id = authService.getUserIdByUsername(email);
+                return new TokenResponse(id, email, token);
+
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create user");
+                return null;
             }
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return null;
         }
     }
 
