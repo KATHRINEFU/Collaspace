@@ -1,8 +1,6 @@
 package org.mercury.AuthService.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * @ClassName AuthRequest
@@ -11,7 +9,8 @@ import lombok.NoArgsConstructor;
  * @Date 9/10/23 9:43 PM
  * @Version 1.0
  **/
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthRequest {

@@ -2,7 +2,9 @@ package org.mercury.AuthService.controller;
 
 import io.jsonwebtoken.JwtException;
 import org.mercury.AuthService.bean.UserCredential;
+import org.mercury.AuthService.bean.UserLoginCredential;
 import org.mercury.AuthService.dto.AuthRequest;
+import org.mercury.AuthService.dto.TokenResponse;
 import org.mercury.AuthService.dto.ValidationRequest;
 import org.mercury.AuthService.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,13 +49,34 @@ public class AuthController {
         }
     }
 
+//    @PostMapping
+//    public ResponseEntity<String> loginUser(@RequestBody UserLoginCredential user){
+//        try {
+//            UserCredential validateUser = authService.loginUser(user);
+//            if (validateUser != null) {
+//                return ResponseEntity.status(HttpStatus.CREATED).body("User login successfully");
+//            } else {
+//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to login user");
+//            }
+//        } catch (IllegalArgumentException e) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+//        }
+//    }
+
     @PostMapping("/token")
-    public String getToken(@RequestBody AuthRequest authRequest) {
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-        if (authenticate.isAuthenticated()) {
-            return authService.generateToken(authRequest.getUsername());
-        } else {
-            throw new RuntimeException("invalid access");
+    public TokenResponse getToken(@RequestBody AuthRequest authRequest) {
+        try{
+            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+            if (authenticate.isAuthenticated()) {
+                String email = authRequest.getUsername();
+                String token = authService.generateToken(email);
+                int id = authService.getUserIdByUsername(email);
+                return new TokenResponse(id, email, token);
+            } else {
+                return null;
+            }
+        }catch (IllegalArgumentException e) {
+            return null;
         }
     }
 
