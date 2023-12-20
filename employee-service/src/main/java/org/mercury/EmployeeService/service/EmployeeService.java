@@ -146,4 +146,14 @@ public class EmployeeService {
                 .bodyToMono(new ParameterizedTypeReference<List<Team>>() {})
                 .block();
     }
+
+    public void updateProfileImage(UpdateProfileRequest request) {
+        Employee employee  = employeeDao.findById(request.getEmployeeId()).orElse(null);
+        if(employee == null){
+            throw new RuntimeException("Employee Not Found");
+        }
+        System.out.println("Setting new image url: " + request.getNewImageUrl() );
+        employee.setEmployeeProfileUrl(request.getNewImageUrl());
+        employeeDao.save(employee);
+    }
 }

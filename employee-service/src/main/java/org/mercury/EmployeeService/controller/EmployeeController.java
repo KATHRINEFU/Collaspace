@@ -7,6 +7,7 @@ import org.mercury.EmployeeService.bean.Employee;
 import org.mercury.EmployeeService.bean.Team;
 import org.mercury.EmployeeService.dto.EmployeeDashboard;
 import org.mercury.EmployeeService.dto.EmployeeRegistration;
+import org.mercury.EmployeeService.dto.UpdateProfileRequest;
 import org.mercury.EmployeeService.filter.EmployeeFilter;
 import org.mercury.EmployeeService.service.DepartmentService;
 import org.mercury.EmployeeService.service.EmployeeService;
@@ -62,6 +63,17 @@ public class EmployeeController {
     @GetMapping("/teams/{id}")
     public List<Team> getEmployeeTeamsData(@PathVariable int id){
         return employeeService.getEmployeeTeams(id);
+    }
+
+    @PostMapping("/updateprofile")
+    public ResponseEntity<String> updateProfileImage(@RequestBody UpdateProfileRequest request){
+        try{
+            employeeService.updateProfileImage(request);
+            return ResponseEntity.status(HttpStatus.OK).body("Profile image updated successfully");
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+
     }
 
 //    @GetMapping("/clients/{id}")
