@@ -6,6 +6,7 @@ import org.mercury.EmployeeService.bean.Department;
 import org.mercury.EmployeeService.bean.Employee;
 import org.mercury.EmployeeService.bean.Team;
 import org.mercury.EmployeeService.dto.EmployeeDashboard;
+import org.mercury.EmployeeService.dto.EmployeeEditRequest;
 import org.mercury.EmployeeService.dto.EmployeeRegistration;
 import org.mercury.EmployeeService.dto.UpdateProfileRequest;
 import org.mercury.EmployeeService.filter.EmployeeFilter;
@@ -87,14 +88,26 @@ public class EmployeeController {
     @PostMapping("/create")
     @CrossOrigin
     public ResponseEntity<String> addEmployee(@RequestBody EmployeeRegistration employeeRegistration) {
-        System.out.println("Received request for creating employee");
-        log.info("Received request for creating employee");
         try {
             Employee addedEmployee = employeeService.register(employeeRegistration);
             if (addedEmployee != null) {
                 return ResponseEntity.status(HttpStatus.OK).body("Employee registered successfully");
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee failed to register");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<String> editEmployee(@PathVariable int id, @RequestBody EmployeeEditRequest request){
+        try {
+            Employee editedEmployee = employeeService.editById(id, request);
+            if (editedEmployee != null) {
+                return ResponseEntity.status(HttpStatus.OK).body("Employee profile updated successfully");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee failed to update");
             }
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

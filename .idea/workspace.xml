@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="restructured employee get teams">
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dto/UpdateProfileRequest.java" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added update profile image">
+      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dto/EmployeeEditRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" afterDir="false" />
@@ -296,7 +296,7 @@
       <workItem from="1701878356865" duration="1456000" />
       <workItem from="1702653820517" duration="6406000" />
       <workItem from="1702667944564" duration="11005000" />
-      <workItem from="1702693512360" duration="30219000" />
+      <workItem from="1702693512360" duration="31232000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -536,7 +536,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703018372816</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="added update profile image">
+      <created>1703059891672</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1703059891672</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -566,7 +573,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added api for getting and editing event collaboration" />
     <MESSAGE value="added api for team announcement" />
     <MESSAGE value="added api for clientAccountService-company, updated EmployeeService with webclient" />
     <MESSAGE value="added api for clientAccountService-contact" />
@@ -591,6 +597,7 @@
     <MESSAGE value="enabled verification for login" />
     <MESSAGE value="enabled signup flow" />
     <MESSAGE value="restructured employee get teams" />
-    <option name="LAST_COMMIT_MESSAGE" value="restructured employee get teams" />
+    <MESSAGE value="added update profile image" />
+    <option name="LAST_COMMIT_MESSAGE" value="added update profile image" />
   </component>
 </project>

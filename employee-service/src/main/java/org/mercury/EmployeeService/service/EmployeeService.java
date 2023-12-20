@@ -152,8 +152,21 @@ public class EmployeeService {
         if(employee == null){
             throw new RuntimeException("Employee Not Found");
         }
-        System.out.println("Setting new image url: " + request.getNewImageUrl() );
+
         employee.setEmployeeProfileUrl(request.getNewImageUrl());
         employeeDao.save(employee);
+    }
+
+    public Employee editById(int id, EmployeeEditRequest request) {
+        Employee employee  = employeeDao.findById(id).orElse(null);
+        if(employee == null){
+            throw new RuntimeException("Employee Not Found");
+        }
+        employee.setEmployeeFirstname(request.getFirstName());
+        employee.setEmployeeLastname(request.getLastName());
+        employee.setEmployeePhone(request.getPhone());
+        employee.setEmployeeLocationCity(request.getLocationCity());
+        employee.setEmployeeLocationCountry(request.getLocationCountry());
+        return employeeDao.save(employee);
     }
 }
