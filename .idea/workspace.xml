@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added update profile image">
-      <change afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dto/EmployeeEditRequest.java" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added edit profile">
+      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/config/WebClientConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/InviteMembersRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/TeamMemberRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/TeamController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/TeamRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/TeamRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/TeamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/TeamService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,11 +91,11 @@
       <recent name="$PROJECT_DIR$/team-service/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.mercury.TeamService.config" />
       <recent name="org.mercury.AuthService.config" />
       <recent name="org.mercury.ApiGateway.config" />
       <recent name="org.mercury.TicketService.bean" />
       <recent name="org.mercury.TicketService.service" />
-      <recent name="org.mercury.EventService.service" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -296,7 +299,7 @@
       <workItem from="1701878356865" duration="1456000" />
       <workItem from="1702653820517" duration="6406000" />
       <workItem from="1702667944564" duration="11005000" />
-      <workItem from="1702693512360" duration="31232000" />
+      <workItem from="1702693512360" duration="43894000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -543,7 +546,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703059891672</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="added edit profile">
+      <created>1703061828333</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1703061828334</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -573,7 +583,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added api for team announcement" />
     <MESSAGE value="added api for clientAccountService-company, updated EmployeeService with webclient" />
     <MESSAGE value="added api for clientAccountService-contact" />
     <MESSAGE value="added connection to swagger api doc" />
@@ -598,6 +607,7 @@
     <MESSAGE value="enabled signup flow" />
     <MESSAGE value="restructured employee get teams" />
     <MESSAGE value="added update profile image" />
-    <option name="LAST_COMMIT_MESSAGE" value="added update profile image" />
+    <MESSAGE value="added edit profile" />
+    <option name="LAST_COMMIT_MESSAGE" value="added edit profile" />
   </component>
 </project>

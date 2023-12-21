@@ -9,15 +9,19 @@ import org.mercury.TeamService.dao.TeamAccountDao;
 import org.mercury.TeamService.dao.TeamDao;
 import org.mercury.TeamService.dao.TeamMemberDao;
 import org.mercury.TeamService.bean.Account;
+import org.mercury.TeamService.dto.InviteMembersRequest;
 import org.mercury.TeamService.dto.TeamMemberDto;
+import org.mercury.TeamService.dto.TeamMemberRequest;
 import org.mercury.TeamService.dto.TeamRequest;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -51,6 +55,14 @@ public class TeamService {
     @Autowired
     private EmailService emailService;
 
+    private final WebClient.Builder webClientBuilder;
+
+    @Autowired
+    public TeamService(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
+    }
+
+
     private final Map<Integer, CompletableFuture<Employee>> employeeIdToFutures = new ConcurrentHashMap<>();
     private final Map<Integer, CompletableFuture<Account>> accountIdToFutures = new ConcurrentHashMap<>();
 
@@ -77,23 +89,18 @@ public class TeamService {
             sb.append(",");
         }
         team.setTeamType(sb.toString());
-        inviteTeamMember(team.getTeamName(), teamRequest.getMembers());
-        return teamDao.save(team);
-    }
+//        inviteTeamMember(team.getTeamName(), teamRequest.getMembers());
+        Team addedTeam = teamDao.save(team);
 
-    private void inviteTeamMember(String teamName, List<Employee> members){
-        for(Employee member: members){
-            Map<String, String> placeholders = new HashMap<>();
-            placeholders.put("name", member.getEmployeeFirstname() + " " + member.getEmployeeLastname());
-            placeholders.put("team_name", teamName);
-            placeholders.put("action_url", "http://localhost:5174/user/dashboard");
-            placeholders.put("support_email", "yuehaofu207@gmail.com");
-            emailService.sendEmail(
-                    "invite",
-                    member.getEmployeeEmail(),
-                    "CollaSpace | Team Invitation",
-                    placeholders);
-        }
+        // TODO: add in teamMemberDao
+        TeamMember teamMember = new TeamMember();
+        teamMember.setTeam(addedTeam);
+        teamMember.setEmployeeId(teamRequest.getTeamCreator());
+        teamMember.setJoindate(new Date());
+        teamMember.setRole("owner");
+        teamMemberDao.save(teamMember);
+
+        return addedTeam;
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
@@ -234,5 +241,55 @@ public class TeamService {
         }
         log.info("Got teams by employee " + id + ": size of "+ teamList.size());
         return teamList;
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+    public Team inviteTeamMembers(int id, InviteMembersRequest requests) {
+        Team team = teamDao.findById(id).orElse(null);
+        if(team==null) return null;
+        List<Employee> employees = new ArrayList<>();
+        WebClient webClient = webClientBuilder.build();
+        for (TeamMemberRequest request : requests.getMembers()) {
+            int employeeId = request.getEmployeeId();
+            try {
+                Employee employee = webClient.get()
+                        .uri("http://localhost:8080/employee/" + employeeId)
+                        .retrieve()
+                        .bodyToMono(Employee.class)
+                        .block();
+
+                if (employee != null) {
+                    log.info("Add employee + " + employeeId + "to team " + team.getTeamId());
+                    employees.add(employee);
+                    TeamMember teamMember = new TeamMember();
+                    teamMember.setTeam(team);
+                    teamMember.setEmployeeId(employeeId);
+                    teamMember.setJoindate(new Date(0));
+                    teamMember.setRole(request.getAuthority());
+                    teamMemberDao.save(teamMember);
+                }
+            } catch (Exception e) {
+                System.err.println("Error fetching employee with ID " + employeeId + ": " + e.getMessage());
+                return null;
+            }
+        }
+
+        sendInvitationToMembers(team.getTeamName(), employees);
+        return team;
+    }
+
+    private void sendInvitationToMembers(String teamName, List<Employee> members){
+        for(Employee member: members){
+            Map<String, String> placeholders = new HashMap<>();
+            placeholders.put("name", member.getEmployeeFirstname() + " " + member.getEmployeeLastname());
+            placeholders.put("team_name", teamName);
+            placeholders.put("action_url", "http://localhost:5174/user/dashboard");
+            placeholders.put("support_email", "yuehaofu207@gmail.com");
+            emailService.sendEmail(
+                    "invite",
+                    member.getEmployeeEmail(),
+                    "CollaSpace | Team Invitation",
+                    placeholders);
+        }
     }
 }

@@ -25,6 +25,6 @@ public class TeamRequest {
     private int teamCreator;
     private String teamDescription;
     private List<String> teamTypes;
-    private List<Employee> members;
-    private List<Account> accounts;
+//    private List<Employee> members;
+//    private List<Account> accounts;
 }

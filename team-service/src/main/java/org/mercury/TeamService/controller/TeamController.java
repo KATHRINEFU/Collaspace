@@ -2,6 +2,7 @@ package org.mercury.TeamService.controller;
 
 import org.mercury.TeamService.bean.Team;
 import org.mercury.TeamService.bean.Account;
+import org.mercury.TeamService.dto.InviteMembersRequest;
 import org.mercury.TeamService.dto.TeamMemberDto;
 import org.mercury.TeamService.dto.TeamRequest;
 import org.mercury.TeamService.service.TeamService;
@@ -73,6 +74,20 @@ public class TeamController {
                 return ResponseEntity.status(HttpStatus.OK).body("Team edited successfully");
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Team not found");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/invitemembers/{id}")
+    public ResponseEntity<String> inviteMembersToTeam(@PathVariable int id, @RequestBody InviteMembersRequest request) {
+        try {
+            Team editedTeam = teamService.inviteTeamMembers(id, request);
+            if (editedTeam != null) {
+                return ResponseEntity.status(HttpStatus.OK).body("Members invited successfully");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Failed to invite members");
             }
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
