@@ -9,10 +9,7 @@ import org.mercury.TeamService.dao.TeamAccountDao;
 import org.mercury.TeamService.dao.TeamDao;
 import org.mercury.TeamService.dao.TeamMemberDao;
 import org.mercury.TeamService.bean.Account;
-import org.mercury.TeamService.dto.InviteMembersRequest;
-import org.mercury.TeamService.dto.TeamMemberDto;
-import org.mercury.TeamService.dto.TeamMemberRequest;
-import org.mercury.TeamService.dto.TeamRequest;
+import org.mercury.TeamService.dto.*;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -206,29 +203,30 @@ public class TeamService {
         }
     }
 
-    public CompletableFuture<List<Account>> getAccountsByTeamId(int teamId) {
+    public List<Account> getAccountsByTeamId(int teamId) {
         Team team = teamDao.findById(teamId).orElse(null);
-        if(team == null) return CompletableFuture.completedFuture(null);
-        List<TeamAccount> accounts= teamAccountDao.findAllByTeam(team);
-        if(accounts==null || accounts.isEmpty()) return CompletableFuture.completedFuture(null);
+        if(team == null) return null;
+        List<TeamAccount> teamAccounts= teamAccountDao.findAllByTeam(team);
+        if(teamAccounts==null || teamAccounts.isEmpty()) return null;
 
-        List<CompletableFuture<Account>> accountFutures = new ArrayList<>();
-        for(TeamAccount account : accounts){
-            CompletableFuture<Account> accountFuture = new CompletableFuture<>();
-            int accountId = account.getAccountId();
-            accountIdToFutures.put(accountId, accountFuture);
-
-            rabbitTemplate.convertAndSend("", "q.get-account", accountId);
-            accountFutures.add(accountFuture);
+        WebClient webClient = webClientBuilder.build();
+        List<Account> accounts = new ArrayList<>();
+        for(TeamAccount teamAccount : teamAccounts){
+            int accountId = teamAccount.getAccountId();
+            Account account = webClient.get()
+                    .uri("http://localhost:8080/account/" + accountId)
+                    .retrieve()
+                    .bodyToMono(Account.class)
+                    .block();
+            if(account!=null) {
+                System.out.println("Getting team account, id = "+account.getAccountId());
+                accounts.add(account);
+            }
         }
 
-        return CompletableFuture.allOf(accountFutures.toArray(new CompletableFuture[0]))
-                .thenApply(voidResult ->
-                        accountFutures.stream()
-                                .map(future -> future.exceptionally(e -> null)) // Handle exceptions by returning null
-                                .map(CompletableFuture::join)
-                                .filter(Objects::nonNull) // Filter out null results
-                                .collect(Collectors.toList()));
+        System.out.println("Got teams account of size "+accounts.size());
+
+        return accounts;
     }
 
     public List<Team> getByEmployeeId(int id) {
@@ -247,10 +245,14 @@ public class TeamService {
     public Team inviteTeamMembers(int id, InviteMembersRequest requests) {
         Team team = teamDao.findById(id).orElse(null);
         if(team==null) return null;
+        List<TeamMember> curTeamMembers = team.getMembers();
         List<Employee> employees = new ArrayList<>();
         WebClient webClient = webClientBuilder.build();
         for (TeamMemberRequest request : requests.getMembers()) {
             int employeeId = request.getEmployeeId();
+            if(isMemberExisting(curTeamMembers, employeeId)){
+                continue;
+            }
             try {
                 Employee employee = webClient.get()
                         .uri("http://localhost:8080/employee/" + employeeId)
@@ -278,6 +280,15 @@ public class TeamService {
         return team;
     }
 
+    private boolean isMemberExisting(List<TeamMember> curTeamMembers, int employeeId) {
+        for(TeamMember member: curTeamMembers){
+            if(member.getEmployeeId()==employeeId){
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void sendInvitationToMembers(String teamName, List<Employee> members){
         for(Employee member: members){
             Map<String, String> placeholders = new HashMap<>();
@@ -291,5 +302,34 @@ public class TeamService {
                     "CollaSpace | Team Invitation",
                     placeholders);
         }
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+    public Team inviteClients(int id, InviteClientsRequest requests) {
+        Team team = teamDao.findById(id).orElse(null);
+        if(team==null) return null;
+        List<TeamAccount> curTeamAccounts = team.getAccounts();
+        for (Integer accountId : requests.getAccountIds()) {
+            if(isAccountExisting(curTeamAccounts, accountId)){
+                continue;
+            };
+            TeamAccount newTeamAccount = new TeamAccount();
+            newTeamAccount.setTeam(team);
+            newTeamAccount.setAccountId(accountId);
+
+            TeamAccount createdTeamAccount= teamAccountDao.save(newTeamAccount);
+            curTeamAccounts.add(createdTeamAccount);
+        }
+        team.setAccounts(curTeamAccounts);
+        return teamDao.save(team);
+    }
+
+    private boolean isAccountExisting(List<TeamAccount> curTeamAccounts, Integer accountId) {
+        for(TeamAccount account: curTeamAccounts){
+            if(account.getAccountId()==accountId){
+                return true;
+            }
+        }
+        return false;
     }
 }

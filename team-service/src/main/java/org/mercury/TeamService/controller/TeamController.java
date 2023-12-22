@@ -2,6 +2,7 @@ package org.mercury.TeamService.controller;
 
 import org.mercury.TeamService.bean.Team;
 import org.mercury.TeamService.bean.Account;
+import org.mercury.TeamService.dto.InviteClientsRequest;
 import org.mercury.TeamService.dto.InviteMembersRequest;
 import org.mercury.TeamService.dto.TeamMemberDto;
 import org.mercury.TeamService.dto.TeamRequest;
@@ -48,7 +49,7 @@ public class TeamController {
     }
 
     @GetMapping("/accounts/{id}")
-    public CompletableFuture<List<Account>> getTeamAccounts(@PathVariable int id){
+    public List<Account> getTeamAccounts(@PathVariable int id){
         return teamService.getAccountsByTeamId(id);
     }
 
@@ -88,6 +89,20 @@ public class TeamController {
                 return ResponseEntity.status(HttpStatus.OK).body("Members invited successfully");
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Failed to invite members");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/inviteclients/{id}")
+    public ResponseEntity<String> inviteClientsToTeam(@PathVariable int id, @RequestBody InviteClientsRequest request) {
+        try {
+            Team editedTeam = teamService.inviteClients(id, request);
+            if (editedTeam != null) {
+                return ResponseEntity.status(HttpStatus.OK).body("Clients added successfully");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Failed to add clients");
             }
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

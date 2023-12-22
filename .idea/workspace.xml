@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added edit profile">
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/config/WebClientConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/InviteMembersRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/TeamMemberRequest.java" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added inviting team members">
+      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/InviteClientsRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/TeamController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/TeamRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/TeamRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/TeamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/TeamService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,30 +49,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "extract.method.default.visibility": "private",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "/Users/katefu/Jobs/mercury/project/collaspace-parent/employee-service/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "spring.configuration.checksum": "094eab5620557d08844d6b4d43383df2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/katefu/Jobs/mercury/project/collaspace-parent/employee-service/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;094eab5620557d08844d6b4d43383df2&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -243,7 +240,6 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.EmployeeServiceTest" />
-      <item itemvalue="JUnit.EmployeeServiceTest (1)" />
       <item itemvalue="JUnit.EmployeeServiceTest.getAllTest" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.AuthServiceApplication" />
@@ -257,7 +253,6 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.EmployeeServiceTest (1)" />
         <item itemvalue="JUnit.EmployeeServiceTest" />
         <item itemvalue="JUnit.EmployeeServiceTest.getAllTest" />
       </list>
@@ -299,7 +294,8 @@
       <workItem from="1701878356865" duration="1456000" />
       <workItem from="1702653820517" duration="6406000" />
       <workItem from="1702667944564" duration="11005000" />
-      <workItem from="1702693512360" duration="43894000" />
+      <workItem from="1702693512360" duration="50438000" />
+      <workItem from="1703225500654" duration="1093000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -553,7 +549,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703061828334</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="added inviting team members">
+      <created>1703135123910</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1703135123910</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -583,7 +586,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added api for clientAccountService-company, updated EmployeeService with webclient" />
     <MESSAGE value="added api for clientAccountService-contact" />
     <MESSAGE value="added connection to swagger api doc" />
     <MESSAGE value="added eureka server, tried spring security" />
@@ -608,6 +610,7 @@
     <MESSAGE value="restructured employee get teams" />
     <MESSAGE value="added update profile image" />
     <MESSAGE value="added edit profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="added edit profile" />
+    <MESSAGE value="added inviting team members" />
+    <option name="LAST_COMMIT_MESSAGE" value="added inviting team members" />
   </component>
 </project>
