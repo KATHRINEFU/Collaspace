@@ -53,6 +53,11 @@ public class TeamController {
         return teamService.getAccountsByTeamId(id);
     }
 
+    @PostMapping("/accounts/teamlist")
+    public List<Account> getTeamAccountsByTeamList(@RequestBody List<Integer> ids){
+        return teamService.getAccountsByTeamList(ids);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<String> addTeam(@RequestBody TeamRequest teamRequest) {
         try {

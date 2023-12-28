@@ -16,21 +16,21 @@ import org.springframework.stereotype.Service;
  * @Version 1.0
  **/
 
-@Service
-@Slf4j
-public class GetAccountListener {
-
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
-
-    @Autowired
-    private AccountDao accountDao;
-
-    @RabbitListener(queues = {"q.get-account"})
-    public void onListenGetAccount(int accountId) {
-        Account account = accountDao.findById(accountId).orElse(null);
-        rabbitTemplate.convertAndSend("", "q.return-account", account);
-        log.info("Return-Employee_Teams return sent: {}", account.getAccountId());
-    }
-
-}
+//@Service
+//@Slf4j
+//public class GetAccountListener {
+//
+//    @Autowired
+//    private RabbitTemplate rabbitTemplate;
+//
+//    @Autowired
+//    private AccountDao accountDao;
+//
+//    @RabbitListener(queues = {"q.get-account"})
+//    public void onListenGetAccount(int accountId) {
+//        Account account = accountDao.findById(accountId).orElse(null);
+//        rabbitTemplate.convertAndSend("", "q.return-account", account);
+//        log.info("Return-Employee_Teams return sent: {}", account.getAccountId());
+//    }
+//
+//}

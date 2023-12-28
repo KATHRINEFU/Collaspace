@@ -38,6 +38,7 @@ public class EventRequest {
     // meeting event specific
     private boolean meetingVirtual;
     private String meetingLocation;
+    private String meetingLink;
     private Date meetingStarttime;
     private Date meetingEndtime;
     private String meetingNoteLink;

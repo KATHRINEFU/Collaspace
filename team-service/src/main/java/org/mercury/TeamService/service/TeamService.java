@@ -210,7 +210,7 @@ public class TeamService {
         if(teamAccounts==null || teamAccounts.isEmpty()) return null;
 
         WebClient webClient = webClientBuilder.build();
-        List<Account> accounts = new ArrayList<>();
+        Set<Account> accounts = new HashSet<>();
         for(TeamAccount teamAccount : teamAccounts){
             int accountId = teamAccount.getAccountId();
             Account account = webClient.get()
@@ -223,10 +223,7 @@ public class TeamService {
                 accounts.add(account);
             }
         }
-
-        System.out.println("Got teams account of size "+accounts.size());
-
-        return accounts;
+        return accounts.stream().toList();
     }
 
     public List<Team> getByEmployeeId(int id) {
@@ -331,5 +328,18 @@ public class TeamService {
             }
         }
         return false;
+    }
+
+    public List<Account> getAccountsByTeamList(List<Integer> ids) {
+        Set<Account> accounts = new HashSet<>();
+        for(int id: ids){
+            List<Account> accountsByTeamId = getAccountsByTeamId(id);
+            if(accountsByTeamId!=null && !accountsByTeamId.isEmpty()){
+                accounts.addAll(accountsByTeamId);
+            }
+
+        }
+
+        return accounts.stream().toList();
     }
 }

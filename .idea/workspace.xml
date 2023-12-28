@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added inviting team members">
-      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/InviteClientsRequest.java" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added inviting team accounts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/GetAccountListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/GetAccountListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/dto/EventRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/dto/EventRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/TeamController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/TeamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/TeamService.java" afterDir="false" />
     </list>
@@ -245,8 +246,8 @@
       <item itemvalue="Spring Boot.AuthServiceApplication" />
       <item itemvalue="Spring Boot.AccountServiceApplication" />
       <item itemvalue="Spring Boot.DiscoveryServerApplication" />
-      <item itemvalue="Spring Boot.ClientServiceApplication" />
       <item itemvalue="Spring Boot.EmployeeServiceApplication" />
+      <item itemvalue="Spring Boot.ClientServiceApplication" />
       <item itemvalue="Spring Boot.EventServiceApplication" />
       <item itemvalue="Spring Boot.TeamServiceApplication" />
       <item itemvalue="Spring Boot.TicketServiceApplication" />
@@ -295,7 +296,10 @@
       <workItem from="1702653820517" duration="6406000" />
       <workItem from="1702667944564" duration="11005000" />
       <workItem from="1702693512360" duration="50438000" />
-      <workItem from="1703225500654" duration="1093000" />
+      <workItem from="1703225500654" duration="3460000" />
+      <workItem from="1703441666463" duration="1754000" />
+      <workItem from="1703526915666" duration="6127000" />
+      <workItem from="1703735065691" duration="3521000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -556,7 +560,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703135123910</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="added inviting team accounts">
+      <created>1703262808253</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1703262808253</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -586,7 +597,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added api for clientAccountService-contact" />
     <MESSAGE value="added connection to swagger api doc" />
     <MESSAGE value="added eureka server, tried spring security" />
     <MESSAGE value="added api gateway" />
@@ -611,6 +621,7 @@
     <MESSAGE value="added update profile image" />
     <MESSAGE value="added edit profile" />
     <MESSAGE value="added inviting team members" />
-    <option name="LAST_COMMIT_MESSAGE" value="added inviting team members" />
+    <MESSAGE value="added inviting team accounts" />
+    <option name="LAST_COMMIT_MESSAGE" value="added inviting team accounts" />
   </component>
 </project>
