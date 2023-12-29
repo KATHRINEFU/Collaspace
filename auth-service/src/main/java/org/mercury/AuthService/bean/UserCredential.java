@@ -32,6 +32,12 @@ public class UserCredential {
     @Column
     private String employeeEmail;
 
+    @Column
+    private String resetToken;
+
+    @Column
+    private Date tokenExpirationDate;
+
     public UserCredential(String employeePassword, String employeeEmail) {
         this.employeePassword = employeePassword;
         this.employeeEmail = employeeEmail;

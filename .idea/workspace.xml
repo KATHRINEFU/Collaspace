@@ -4,12 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added inviting team accounts">
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="fixed getting team accounts by list">
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/dto/ForgotPasswordRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/dto/PasswordResetRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/service/EmailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/resources/email-template-reset.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/GetAccountListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/GetAccountListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/dto/EventRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/event-service/src/main/java/org/mercury/EventService/dto/EventRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/controller/TeamController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/TeamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/TeamService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/filter/RouteValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/org/mercury/ApiGateway/filter/RouteValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/bean/UserCredential.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/bean/UserCredential.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/org/mercury/AuthService/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,11 +94,11 @@
       <recent name="$PROJECT_DIR$/team-service/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.mercury.AuthService.service" />
       <recent name="org.mercury.TeamService.config" />
       <recent name="org.mercury.AuthService.config" />
       <recent name="org.mercury.ApiGateway.config" />
       <recent name="org.mercury.TicketService.bean" />
-      <recent name="org.mercury.TicketService.service" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -299,7 +304,7 @@
       <workItem from="1703225500654" duration="3460000" />
       <workItem from="1703441666463" duration="1754000" />
       <workItem from="1703526915666" duration="6127000" />
-      <workItem from="1703735065691" duration="3521000" />
+      <workItem from="1703735065691" duration="9952000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -567,7 +572,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703262808253</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="fixed getting team accounts by list">
+      <created>1703744485129</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1703744485129</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,7 +609,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added connection to swagger api doc" />
     <MESSAGE value="added eureka server, tried spring security" />
     <MESSAGE value="added api gateway" />
     <MESSAGE value="added spring security and jwt on auth service" />
@@ -622,6 +633,7 @@
     <MESSAGE value="added edit profile" />
     <MESSAGE value="added inviting team members" />
     <MESSAGE value="added inviting team accounts" />
-    <option name="LAST_COMMIT_MESSAGE" value="added inviting team accounts" />
+    <MESSAGE value="fixed getting team accounts by list" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed getting team accounts by list" />
   </component>
 </project>
