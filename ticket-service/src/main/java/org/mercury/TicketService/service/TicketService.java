@@ -7,6 +7,7 @@ import org.mercury.TicketService.bean.TicketLog;
 import org.mercury.TicketService.criteria.SearchCriteria;
 import org.mercury.TicketService.dao.TicketAssignDao;
 import org.mercury.TicketService.dao.TicketDao;
+import org.mercury.TicketService.dto.TicketCreationRequest;
 import org.mercury.TicketService.filter.TicketFilter;
 import org.mercury.TicketService.http.Response;
 import org.mercury.TicketService.specification.TicketSpecification;
@@ -55,14 +56,45 @@ public class TicketService {
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-    public Response addTicket(Ticket ticket){
+    public Response addTicket(TicketCreationRequest request){
+        Ticket ticket = new Ticket();
+        ticket.setTicketCreator(request.getTicketCreator());
+        ticket.setTicketCreationdate(new Date());
+        ticket.setTicketLastUpdatedate(new Date());
+        ticket.setTicketStatus("pending");
+        ticket.setTicketTitle(request.getTicketTitle());
+        ticket.setTicketDescription(request.getTicketDescription());
+        ticket.setTicketPriority(request.getTicketPriority());
+        ticket.setTicketFromTeam(request.getTicketFromTeam());
+        ticket.setTicketDuedate(request.getTicketDueDate());
+        Ticket newTicket = ticketDao.save(ticket);
+
+        List<TicketAssign> assigns = new ArrayList<>();
+
+        TicketAssign assignee = new TicketAssign();
+        assignee.setTicket(newTicket);
+        assignee.setEmployeeId(request.getAssigneeId());
+        assignee.setRole("assignee");
+        assignee.setTicketAssigndate(new Date());
+        assigns.add(assignee);
+        ticketAssignDao.save(assignee);
+
+        request.getViewerIds().forEach((viewerId -> {
+            TicketAssign viewer = new TicketAssign();
+            viewer.setTicket(newTicket);
+            viewer.setEmployeeId(viewerId);
+            viewer.setRole("viewer");
+            viewer.setTicketAssigndate(new Date());
+            assigns.add(viewer);
+            ticketAssignDao.save(viewer);
+        }));
+
+        newTicket.setAssigns(assigns);
+
         try{
-            List<TicketAssign> assignRoles = ticket.getAssigns();
+            List<TicketAssign> assignRoles = newTicket.getAssigns();
             List<Employee> employees = new ArrayList<>();
             assignRoles.forEach((ticketAssign -> {
-                ticketAssign.setTicket(ticket);
-                // employeeId and role are already set
-
                 Employee employee = webClient.get()
                         .uri("/{id}",ticketAssign.getEmployeeId())
                         .retrieve()
@@ -71,18 +103,17 @@ public class TicketService {
                 if (employee != null) {
                     employees.add(employee);
                 }
-
             }));
 
             Employee creator = webClient.get()
-                    .uri("/{id}", ticket.getTicketCreator())
+                    .uri("/{id}", request.getTicketCreator())
                     .retrieve()
                     .bodyToMono(Employee.class)
                     .block();
 
             assert creator != null;
 
-            inviteTicketMember(ticket.getTicketTitle(), creator.getEmployeeFirstname() + " "+ creator.getEmployeeLastname(), employees);
+            inviteTicketMember(request.getTicketTitle(), creator.getEmployeeFirstname() + " "+ creator.getEmployeeLastname(), employees);
 
             // ticketlogs is null when passed in
             // is a log for creation necessary?
@@ -90,7 +121,6 @@ public class TicketService {
             logs.add(new TicketLog(ticket, ticket.getTicketCreator(), new Date(), "Ticket Created"));
             ticket.setTicketLogs(logs);
 
-            ticketDao.save(ticket);
             return new Response(true);
         }catch (Exception e){
             System.out.println(e.getMessage());

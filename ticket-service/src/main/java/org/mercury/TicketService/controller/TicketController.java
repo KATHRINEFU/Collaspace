@@ -1,6 +1,7 @@
 package org.mercury.TicketService.controller;
 
 import org.mercury.TicketService.bean.Ticket;
+import org.mercury.TicketService.dto.TicketCreationRequest;
 import org.mercury.TicketService.filter.TicketFilter;
 import org.mercury.TicketService.http.Response;
 import org.mercury.TicketService.service.TicketService;
@@ -53,8 +54,8 @@ public class TicketController {
     }
 
     @PostMapping("/create")
-    public Response addTicket(@RequestBody Ticket ticket){
-        return ticketService.addTicket(ticket);
+    public Response addTicket(@RequestBody TicketCreationRequest request){
+        return ticketService.addTicket(request);
     }
 
 }
