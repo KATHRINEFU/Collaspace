@@ -65,7 +65,6 @@ public class EmployeeController {
     public List<Team> getEmployeeTeamsData(@PathVariable int id){
         return employeeService.getEmployeeTeams(id);
     }
-
     @PostMapping("/updateprofile")
     public ResponseEntity<String> updateProfileImage(@RequestBody UpdateProfileRequest request){
         try{

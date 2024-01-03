@@ -8,6 +8,7 @@ import org.mercury.TicketService.criteria.SearchCriteria;
 import org.mercury.TicketService.dao.TicketAssignDao;
 import org.mercury.TicketService.dao.TicketDao;
 import org.mercury.TicketService.dto.TicketCreationRequest;
+import org.mercury.TicketService.dto.TicketEditRequest;
 import org.mercury.TicketService.filter.TicketFilter;
 import org.mercury.TicketService.http.Response;
 import org.mercury.TicketService.specification.TicketSpecification;
@@ -194,18 +195,92 @@ public class TicketService {
 
     }
 
-    public Response editTicket(Ticket ticket){
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+    public Response editTicket(TicketEditRequest request){
         // can only edit ticket's status, description
         try{
-            Ticket ticketFromDB = ticketDao.findById(ticket.getTicketId()).get();
-            ticketFromDB.setTicketDescription(ticket.getTicketDescription());
-            ticketFromDB.setTicketStatus(ticket.getTicketStatus());
-            ticketDao.save(ticketFromDB);
-            return new Response(true);
+            Ticket ticketFromDB = ticketDao.findById(request.getTicketId()).orElse(null);
+            if(ticketFromDB==null){
+                return new Response(false);
+            }
+            ticketFromDB.setTicketDescription(request.getTicketDescription());
+            ticketFromDB.setTicketStatus(request.getTicketStatus());
+            ticketFromDB.setTicketLastUpdatedate(new Date());
+            Ticket editedTicket = ticketDao.save(ticketFromDB);
+
+            List<TicketAssign> assigns = new ArrayList<>();
+            List<TicketAssign> oldAssigns = editedTicket.getAssigns();
+
+            List<Integer> oldAssignIds = getAssignIds(oldAssigns);
+            List<Integer> newAssignIds = new ArrayList<>();
+            if(request.getAddViewerIds()!=null && request.getAddViewerIds().size()>0){
+                request.getAddViewerIds().forEach((viewerId -> {
+                    if(!oldAssignIds.contains(viewerId)){
+                        TicketAssign viewer = new TicketAssign();
+                        viewer.setTicket(editedTicket);
+                        viewer.setEmployeeId(viewerId);
+                        viewer.setRole("viewer");
+                        viewer.setTicketAssigndate(new Date());
+                        newAssignIds.add(viewerId);
+                        assigns.add(viewer);
+                        ticketAssignDao.save(viewer);
+                    }
+
+                }));
+            }
+
+            if(request.getAddSupervisorIds()!=null && request.getAddSupervisorIds().size()>0){
+                request.getAddSupervisorIds().forEach((supervisorId -> {
+                    if(!oldAssignIds.contains(supervisorId)){
+                        TicketAssign supervisor = new TicketAssign();
+                        supervisor.setTicket(editedTicket);
+                        supervisor.setEmployeeId(supervisorId);
+                        supervisor.setRole("supervisor");
+                        supervisor.setTicketAssigndate(new Date());
+                        newAssignIds.add(supervisorId);
+                        assigns.add(supervisor);
+                        ticketAssignDao.save(supervisor);
+                    }
+
+                }));
+            }
+
+            oldAssigns.addAll(assigns);
+
+                List<Employee> employees = new ArrayList<>();
+                newAssignIds.forEach((employeeId -> {
+                    Employee employee = webClient.get()
+                            .uri("/{id}",employeeId)
+                            .retrieve()
+                            .bodyToMono(Employee.class)
+                            .block(); // This makes the call synchronous
+                    if (employee != null) {
+                        employees.add(employee);
+                    }
+                }));
+
+                Employee creator = webClient.get()
+                        .uri("/{id}", editedTicket.getTicketCreator())
+                        .retrieve()
+                        .bodyToMono(Employee.class)
+                        .block();
+
+                assert creator != null;
+
+                inviteTicketMember(editedTicket.getTicketTitle(), creator.getEmployeeFirstname() + " "+ creator.getEmployeeLastname(), employees);
+                return new Response(true);
         }catch (Exception e){
             System.out.println(e.getMessage());
             return new Response(false);
         }
+    }
+
+    private List<Integer> getAssignIds(List<TicketAssign> oldAssigns) {
+        List<Integer> ids = new ArrayList<>();
+        oldAssigns.forEach((ticketAssign -> {
+            ids.add(ticketAssign.getEmployeeId());
+        }));
+        return ids;
     }
 
     public List<Ticket> getByEmployeeId(int id) {
