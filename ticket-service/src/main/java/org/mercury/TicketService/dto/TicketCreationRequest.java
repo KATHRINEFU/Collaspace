@@ -26,4 +26,6 @@ public class TicketCreationRequest {
     private Date ticketDueDate;
     private int assigneeId;
     private List<Integer> viewerIds;
+    private List<Integer> supervisorIds;
+    private List<String> files;
 }

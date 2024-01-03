@@ -7,11 +7,13 @@ import org.mercury.TicketService.bean.TicketLog;
 import org.mercury.TicketService.criteria.SearchCriteria;
 import org.mercury.TicketService.dao.TicketAssignDao;
 import org.mercury.TicketService.dao.TicketDao;
+import org.mercury.TicketService.dto.DocumentCreationRequest;
 import org.mercury.TicketService.dto.TicketCreationRequest;
 import org.mercury.TicketService.dto.TicketEditRequest;
 import org.mercury.TicketService.filter.TicketFilter;
 import org.mercury.TicketService.http.Response;
 import org.mercury.TicketService.specification.TicketSpecification;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -42,6 +44,9 @@ public class TicketService {
     private EmailService emailService;
 
     private final WebClient webClient;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     public TicketService(){
         this.webClient = WebClient.create("http://localhost:8080/employee/");
@@ -80,17 +85,41 @@ public class TicketService {
         assigns.add(assignee);
         ticketAssignDao.save(assignee);
 
-        request.getViewerIds().forEach((viewerId -> {
-            TicketAssign viewer = new TicketAssign();
-            viewer.setTicket(newTicket);
-            viewer.setEmployeeId(viewerId);
-            viewer.setRole("viewer");
-            viewer.setTicketAssigndate(new Date());
-            assigns.add(viewer);
-            ticketAssignDao.save(viewer);
-        }));
+        if(request.getViewerIds()!= null && request.getViewerIds().size()>0){
+            request.getViewerIds().forEach((viewerId -> {
+                TicketAssign viewer = new TicketAssign();
+                viewer.setTicket(newTicket);
+                viewer.setEmployeeId(viewerId);
+                viewer.setRole("viewer");
+                viewer.setTicketAssigndate(new Date());
+                assigns.add(viewer);
+                ticketAssignDao.save(viewer);
+            }));
+        }
+
+        if(request.getSupervisorIds()!=null && request.getSupervisorIds().size()>0){
+            request.getSupervisorIds().forEach((supervisorId -> {
+                TicketAssign supervisor = new TicketAssign();
+                supervisor.setTicket(newTicket);
+                supervisor.setEmployeeId(supervisorId);
+                supervisor.setRole("supervisor");
+                supervisor.setTicketAssigndate(new Date());
+                assigns.add(supervisor);
+                ticketAssignDao.save(supervisor);
+            }));
+        }
+
 
         newTicket.setAssigns(assigns);
+
+        if(request.getFiles()!=null && request.getFiles().size()>0){
+            List<DocumentCreationRequest> documentRequests = new ArrayList<>();
+            request.getFiles().forEach(file -> {
+                DocumentCreationRequest documentRequest = new DocumentCreationRequest(file, "ticket");
+                documentRequests.add(documentRequest);
+            });
+            rabbitTemplate.convertAndSend("", "q.create-document", documentRequests);
+        }
 
         try{
             List<TicketAssign> assignRoles = newTicket.getAssigns();
