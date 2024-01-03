@@ -4,20 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="fixed editing tickets">
-      <change afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/DocumentServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/bean/Document.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/config/RabbitMQConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/controller/DocumentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/dao/DocumentDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/dto/DocumentCreationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/service/DocumentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/document-service/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/config/RabbitMQConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dto/DocumentCreationRequest.java" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="added document service and adding ticket documents">
+      <change afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dto/TicketWithFilesReturn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/document-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/document-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dto/TicketCreationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dto/TicketCreationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/bean/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/bean/Document.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/controller/DocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/controller/DocumentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/dao/DocumentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/dao/DocumentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/service/DocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/service/DocumentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/controller/TicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/controller/TicketController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -318,7 +313,7 @@
       <workItem from="1703441666463" duration="1754000" />
       <workItem from="1703526915666" duration="6127000" />
       <workItem from="1703735065691" duration="15612000" />
-      <workItem from="1704208643458" duration="13492000" />
+      <workItem from="1704208643458" duration="18126000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -614,7 +609,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704245445732</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="added document service and adding ticket documents">
+      <created>1704257734436</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1704257734436</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -644,7 +646,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added authentication on api gateway" />
     <MESSAGE value="added swagger config for apigateway, leaving 'no operation defined'" />
     <MESSAGE value="added rabbitmq in getting dashboard, not returned" />
     <MESSAGE value="added getting for employee team data" />
@@ -669,6 +670,7 @@
     <MESSAGE value="added resetting user password" />
     <MESSAGE value="fixed creating tickets" />
     <MESSAGE value="fixed editing tickets" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed editing tickets" />
+    <MESSAGE value="added document service and adding ticket documents" />
+    <option name="LAST_COMMIT_MESSAGE" value="added document service and adding ticket documents" />
   </component>
 </project>

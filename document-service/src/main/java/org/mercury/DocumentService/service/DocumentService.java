@@ -7,6 +7,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.print.Doc;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,5 +43,14 @@ public class DocumentService {
             documentDao.save(newDoc);
         });
 
+    }
+
+    public List<String> getByTicketId(int id) {
+        List<Document> documents = documentDao.findAllByTicketId(id);
+        List<String> files = new ArrayList<>();
+        documents.forEach(document -> {
+            files.add(document.getDocumentLink());
+        });
+        return files;
     }
 }

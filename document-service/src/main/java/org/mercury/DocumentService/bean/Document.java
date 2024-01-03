@@ -35,5 +35,8 @@ public class Document {
     private String documentFromType;
 
     @Column
+    private int ticketId;
+
+    @Column
     private Date documentUploaddate;
 }

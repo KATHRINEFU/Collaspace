@@ -10,12 +10,15 @@ import org.mercury.TicketService.dao.TicketDao;
 import org.mercury.TicketService.dto.DocumentCreationRequest;
 import org.mercury.TicketService.dto.TicketCreationRequest;
 import org.mercury.TicketService.dto.TicketEditRequest;
+import org.mercury.TicketService.dto.TicketWithFilesReturn;
 import org.mercury.TicketService.filter.TicketFilter;
 import org.mercury.TicketService.http.Response;
 import org.mercury.TicketService.specification.TicketSpecification;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -49,12 +52,38 @@ public class TicketService {
     private RabbitTemplate rabbitTemplate;
 
     public TicketService(){
-        this.webClient = WebClient.create("http://localhost:8080/employee/");
+        this.webClient = WebClient.create("http://localhost:8080/");
     }
 
-    public Ticket getById(int id){
-        Optional<Ticket> optionalTicket = ticketDao.findById(id);
-        return optionalTicket.orElse(null);
+
+
+    public TicketWithFilesReturn getTicketWithFilesById(int id){
+        Ticket ticket = ticketDao.findById(id).orElse(null);
+        if(ticket==null) return null;
+
+        TicketWithFilesReturn ticketWithFilesReturn = new TicketWithFilesReturn();
+        ticketWithFilesReturn.setTicketId(ticket.getTicketId());
+        ticketWithFilesReturn.setTicketCreator(ticket.getTicketCreator());
+        ticketWithFilesReturn.setTicketCreationdate(ticket.getTicketCreationdate());
+        ticketWithFilesReturn.setTicketLastUpdatedate(ticket.getTicketLastUpdatedate());
+        ticketWithFilesReturn.setTicketTitle(ticket.getTicketTitle());
+        ticketWithFilesReturn.setTicketDescription(ticket.getTicketDescription());
+        ticketWithFilesReturn.setTicketStatus(ticket.getTicketStatus());
+        ticketWithFilesReturn.setTicketPriority(ticket.getTicketPriority());
+        ticketWithFilesReturn.setTicketDuedate(ticket.getTicketDuedate());
+        ticketWithFilesReturn.setAssigns(ticket.getAssigns());
+        ticketWithFilesReturn.setTicketLogs(ticket.getTicketLogs());
+
+        ResponseEntity<List<String>> response = webClient.get()
+                .uri("/document/byticket/{id}",ticket.getTicketId())
+                .retrieve()
+                .toEntity(new ParameterizedTypeReference<List<String>>() {})
+                .block(); // This makes the call synchronous
+        if(response!=null){
+            ticketWithFilesReturn.setFiles(response.getBody());
+        }
+
+        return ticketWithFilesReturn;
     }
 
     public List<Ticket> getByCreatorId(int id){
@@ -126,7 +155,7 @@ public class TicketService {
             List<Employee> employees = new ArrayList<>();
             assignRoles.forEach((ticketAssign -> {
                 Employee employee = webClient.get()
-                        .uri("/{id}",ticketAssign.getEmployeeId())
+                        .uri("/employee/{id}",ticketAssign.getEmployeeId())
                         .retrieve()
                         .bodyToMono(Employee.class)
                         .block(); // This makes the call synchronous
@@ -136,7 +165,7 @@ public class TicketService {
             }));
 
             Employee creator = webClient.get()
-                    .uri("/{id}", request.getTicketCreator())
+                    .uri("/employee/{id}", request.getTicketCreator())
                     .retrieve()
                     .bodyToMono(Employee.class)
                     .block();
@@ -279,7 +308,7 @@ public class TicketService {
                 List<Employee> employees = new ArrayList<>();
                 newAssignIds.forEach((employeeId -> {
                     Employee employee = webClient.get()
-                            .uri("/{id}",employeeId)
+                            .uri("/employee/{id}",employeeId)
                             .retrieve()
                             .bodyToMono(Employee.class)
                             .block(); // This makes the call synchronous
@@ -289,7 +318,7 @@ public class TicketService {
                 }));
 
                 Employee creator = webClient.get()
-                        .uri("/{id}", editedTicket.getTicketCreator())
+                        .uri("/employee/{id}", editedTicket.getTicketCreator())
                         .retrieve()
                         .bodyToMono(Employee.class)
                         .block();
@@ -312,17 +341,23 @@ public class TicketService {
         return ids;
     }
 
-    public List<Ticket> getByEmployeeId(int id) {
+    public List<TicketWithFilesReturn> getByEmployeeId(int id) {
         // all tickets: created by, assigned to
         List<Ticket> allTickets;
         allTickets = new ArrayList<>(ticketDao.findByTicketCreator(id));
         List<TicketAssign> ticketAssigns = ticketAssignDao.findByEmployeeId(id);
-        if(ticketAssigns== null || ticketAssigns.isEmpty()) return allTickets;
-        for(TicketAssign ticketAssign : ticketAssigns){
-            allTickets.add( ticketAssign.getTicket());
+        if(ticketAssigns!= null && !ticketAssigns.isEmpty()) {
+            for(TicketAssign ticketAssign : ticketAssigns){
+                allTickets.add( ticketAssign.getTicket());
+            }
         }
 
-        return allTickets;
+        List<TicketWithFilesReturn> allticketsWithFiles = new ArrayList<>();
+        allTickets.forEach(ticket -> {
+            allticketsWithFiles.add(getTicketWithFilesById(ticket.getTicketId()));
+        });
+
+        return allticketsWithFiles;
 
     }
 
@@ -336,5 +371,9 @@ public class TicketService {
         }
 
         return allTickets;
+    }
+
+    public Ticket getById(int ticketId) {
+        return ticketDao.findById(ticketId).orElse(null);
     }
 }

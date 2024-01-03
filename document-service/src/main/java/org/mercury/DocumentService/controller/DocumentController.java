@@ -5,6 +5,8 @@ import org.mercury.DocumentService.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @ClassName DocumentController
  * @Description TODO
@@ -12,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
  * @Date 1/2/24 11:10 PM
  * @Version 1.0
  **/
-@RestController("/document")
+@RestController
+@RequestMapping("/document")
 public class DocumentController {
     @Autowired
     private DocumentService documentService;
@@ -25,5 +28,10 @@ public class DocumentController {
     @PostMapping("/add")
     public void addDocument(@RequestBody Document document){
         documentService.saveDocument(document);
+    }
+
+    @GetMapping("/byticket/{id}")
+    public List<String> getDocumentsByTicketId(@PathVariable int id){
+        return documentService.getByTicketId(id);
     }
 }
