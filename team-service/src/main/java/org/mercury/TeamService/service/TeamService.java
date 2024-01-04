@@ -359,4 +359,14 @@ public class TeamService {
 
         return new TeamCreatorandSupervisorResponse(ids);
     }
+
+    @RabbitListener(queues = "q.create-team-account")
+    public void onListenCreateTeamAccount(TeamAccountCreationRequest request) {
+        Team team = teamDao.findById(request.getTeamId()).orElse(null);
+        if(team==null) return;
+        TeamAccount teamAccount = new TeamAccount();
+        teamAccount.setTeam(team);
+        teamAccount.setAccountId(request.getAccountId());
+        teamAccountDao.save(teamAccount);
+    }
 }

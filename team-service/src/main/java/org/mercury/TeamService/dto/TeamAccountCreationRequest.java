@@ -1,4 +1,4 @@
-package org.mercury.ClientService.dto;
+package org.mercury.TeamService.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,16 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * @ClassName CompanyRequest
+ * @ClassName TeamAccountCreationRequest
  * @Description TODO
  * @Author katefu
- * @Date 8/31/23 11:22 PM
+ * @Date 1/4/24 12:52 AM
  * @Version 1.0
  **/
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class CompanyRequest {
-    private String companyName;
-    private String companyWebsite;
-    private String companyLogoUrl;
+public class TeamAccountCreationRequest {
+    private int teamId;
+    private int accountId;
 }

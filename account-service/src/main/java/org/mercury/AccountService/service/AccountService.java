@@ -4,6 +4,7 @@ import jakarta.ws.rs.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.mercury.AccountService.bean.Account;
 import org.mercury.AccountService.bean.Company;
+import org.mercury.AccountService.bean.Employee;
 import org.mercury.AccountService.dao.AccountDao;
 import org.mercury.AccountService.dto.*;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -45,7 +46,7 @@ public class AccountService {
     private CompletableFuture<Company> companyFuture;
 
     public AccountService(){
-        this.webClient = WebClient.create("http://localhost:8080/document");
+        this.webClient = WebClient.create("http://localhost:8080/");
     }
 
     public List<Account> getAll() {
@@ -69,7 +70,7 @@ public class AccountService {
         accountWithFiles.setAccountLastUpdatedate(account.getAccountLastUpdatedate());
 
         ResponseEntity<List<String>> response = webClient.get()
-                .uri("/byaccount/{id}",account.getAccountId())
+                .uri("document/byaccount/{id}",account.getAccountId())
                 .retrieve()
                 .toEntity(new ParameterizedTypeReference<List<String>>() {})
                 .block(); // This makes the call synchronous
@@ -115,18 +116,32 @@ public class AccountService {
 
 
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-    public Account addAccount(AccountRequest accountRequest) {
+    public Account addAccount(AccountCreateRequest request) {
         Account newAccount = new Account();
-        newAccount.setAccountType(accountRequest.getAccountType());
-        newAccount.setCompanyId(accountRequest.getCompanyId());
-        newAccount.setAccountCurrentStatus("potential");
-        newAccount.setAccountCurrentResponsibleDepartmentId(1);
-        newAccount.setBiddingPersonnel(accountRequest.getBiddingPersonnel());
-        newAccount.setSalesPersonnel(accountRequest.getSalesPersonnel());
-        newAccount.setSolutionArchitectPersonnel(accountRequest.getSolutionArchitectPersonnel());
-        newAccount.setCustomerSuccessPersonnel(accountRequest.getCustomerSuccessPersonnel());
+        newAccount.setAccountType(request.getAccountType());
+        newAccount.setCompanyId(request.getCompanyId());
+        newAccount.setAccountCurrentStatus(request.getAccountStatus());
+
+        newAccount.setBiddingPersonnel(request.getBiddingPersonnel());
+        newAccount.setSalesPersonnel(request.getSalesPersonnel());
+        newAccount.setSolutionArchitectPersonnel(request.getSolutionArchitectPersonnel());
+        newAccount.setCustomerSuccessPersonnel(request.getCustomerSuccessPersonnel());
         newAccount.setAccountCreationdate(new Date());
         newAccount.setAccountLastUpdatedate(new Date());
+
+        Employee employee = webClient.get()
+                .uri("/employee/{id}",request.getAccountCreator())
+                .retrieve()
+                .bodyToMono(Employee.class)
+                .block(); // This makes the call synchronous
+        assert employee != null;
+        newAccount.setAccountCurrentResponsibleDepartmentId(employee.getDepartmentId());
+
+        TeamAccountCreationRequest teamAccountCreationRequest = new TeamAccountCreationRequest();
+        teamAccountCreationRequest.setTeamId(employee.getDepartmentId());
+        teamAccountCreationRequest.setAccountId(newAccount.getAccountId());
+
+        rabbitTemplate.convertAndSend("", "q.create-team-account", teamAccountCreationRequest);
 
         return accountDao.save(newAccount);
     }

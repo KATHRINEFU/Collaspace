@@ -169,4 +169,8 @@ public class EmployeeService {
         employee.setEmployeeLocationCountry(request.getLocationCountry());
         return employeeDao.save(employee);
     }
+
+    public List<Employee> getByDepartmentId(int id) {
+        return employeeDao.findAllByDepartmentId(id);
+    }
 }

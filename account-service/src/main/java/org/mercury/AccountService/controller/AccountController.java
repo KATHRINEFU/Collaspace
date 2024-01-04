@@ -57,13 +57,13 @@ public class AccountController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> addAccount(@RequestBody AccountRequest accountRequest){
+    public ResponseEntity<String> addAccount(@RequestBody AccountCreateRequest request){
         try {
-            Account addedAccount = accountService.addAccount(accountRequest);
+            Account addedAccount = accountService.addAccount(request);
             if (addedAccount != null) {
-                return ResponseEntity.status(HttpStatus.CREATED).body("Company created successfully");
+                return ResponseEntity.status(HttpStatus.CREATED).body("Account created successfully");
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create company");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create account");
             }
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

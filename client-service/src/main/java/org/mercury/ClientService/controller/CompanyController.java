@@ -35,16 +35,11 @@ public class CompanyController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> addCompany(@RequestBody CompanyRequest companyRequest) {
+    public Company addCompany(@RequestBody CompanyRequest companyRequest) {
         try {
-            Company addedCompany = companyService.addCompany(companyRequest);
-            if (addedCompany != null) {
-                return ResponseEntity.status(HttpStatus.CREATED).body("Company created successfully");
-            } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create company");
-            }
+            return companyService.addCompany(companyRequest);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return null;
         }
     }
 

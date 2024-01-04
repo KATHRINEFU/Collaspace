@@ -40,6 +40,7 @@ public class CompanyService {
         Company company = new Company();
         company.setCompanyName(companyRequest.getCompanyName());
         company.setCompanyWebsite(companyRequest.getCompanyWebsite());
+        company.setCompanyLogoUrl(companyRequest.getCompanyLogoUrl());
         company.setJoindate(new Date());
         return companyDao.save(company);
     }

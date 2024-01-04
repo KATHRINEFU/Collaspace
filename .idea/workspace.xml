@@ -4,24 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="fixed editing event and added getting ticket creator and supervisor">
-      <change afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/dto/AccountAddDocumentsRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/dto/AccountPushRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/dto/AccountUpdateStatusRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/dto/AccountWithFilesReturn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/dto/DocumentCreationRequest.java" afterDir="false" />
+    <list default="true" id="b80ed2ff-6837-44bd-a667-7d4b01f90ed9" name="Changes" comment="Added editing account and getting with files">
+      <change afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/bean/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/dto/AccountCreateRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/dto/TeamAccountCreationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/dto/TeamAccountCreationRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/bean/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/bean/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/config/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/config/RabbitMQConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/controller/AccountController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-service/src/main/java/org/mercury/AccountService/service/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-service/src/main/java/org/mercury/ClientService/controller/CompanyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client-service/src/main/java/org/mercury/ClientService/controller/CompanyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-service/src/main/java/org/mercury/ClientService/dto/CompanyRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/client-service/src/main/java/org/mercury/ClientService/dto/CompanyRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-service/src/main/java/org/mercury/ClientService/service/CompanyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client-service/src/main/java/org/mercury/ClientService/service/CompanyService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/bean/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/bean/Document.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/controller/DocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/controller/DocumentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/dao/DocumentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/dao/DocumentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/dto/DocumentCreationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/dto/DocumentCreationRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/service/DocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/document-service/src/main/java/org/mercury/DocumentService/service/DocumentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/bean/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/bean/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dto/DocumentCreationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/dto/DocumentCreationRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/org/mercury/TicketService/service/TicketService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/controller/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dao/EmployeeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/dao/EmployeeDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/employee-service/src/main/java/org/mercury/EmployeeService/service/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/TeamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/team-service/src/main/java/org/mercury/TeamService/service/TeamService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,10 +101,10 @@
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.mercury.AccountService.dto" />
+      <recent name="org.mercury.AccountService.bean" />
       <recent name="org.mercury.TeamService.dto" />
       <recent name="org.mercury.TicketService.config" />
       <recent name="org.mercury.DocumentService.config" />
-      <recent name="org.mercury.AuthService.service" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -321,7 +320,7 @@
       <workItem from="1703441666463" duration="1754000" />
       <workItem from="1703526915666" duration="6127000" />
       <workItem from="1703735065691" duration="15612000" />
-      <workItem from="1704208643458" duration="28598000" />
+      <workItem from="1704208643458" duration="35235000" />
     </task>
     <task id="LOCAL-00001" summary="added child projects">
       <created>1692282256571</created>
@@ -638,7 +637,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704327288269</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Added editing account and getting with files">
+      <created>1704334770318</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1704334770318</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -668,7 +674,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added getting for employee team data" />
     <MESSAGE value="added getting for all team service data" />
     <MESSAGE value="added getting for account-company data" />
     <MESSAGE value="added getting for events by team" />
@@ -693,6 +698,7 @@
     <MESSAGE value="added document service and adding ticket documents" />
     <MESSAGE value="fixed returning ticket with files" />
     <MESSAGE value="fixed editing event and added getting ticket creator and supervisor" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed editing event and added getting ticket creator and supervisor" />
+    <MESSAGE value="Added editing account and getting with files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added editing account and getting with files" />
   </component>
 </project>

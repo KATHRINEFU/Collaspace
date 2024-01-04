@@ -35,10 +35,10 @@ public class Document {
     private String documentFromType;
 
     @Column
-    private int ticketId;
+    private Integer ticketId;
 
     @Column
-    private int accountId;
+    private Integer accountId;
 
     @Column
     private Date documentUploaddate;
