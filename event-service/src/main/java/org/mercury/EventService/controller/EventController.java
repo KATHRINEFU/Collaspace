@@ -1,6 +1,7 @@
 package org.mercury.EventService.controller;
 
 import org.mercury.EventService.bean.Event;
+import org.mercury.EventService.dto.EventEditRequest;
 import org.mercury.EventService.dto.EventRequest;
 import org.mercury.EventService.filter.EventFilter;
 import org.mercury.EventService.service.EventService;
@@ -73,7 +74,7 @@ public class EventController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<String> editEvent(@PathVariable int id, @RequestBody EventRequest editRequest) {
+    public ResponseEntity<String> editEvent(@PathVariable int id, @RequestBody EventEditRequest editRequest) {
         try {
             Event editedEvent = eventService.editEvent(id, editRequest);
             if (editedEvent != null) {

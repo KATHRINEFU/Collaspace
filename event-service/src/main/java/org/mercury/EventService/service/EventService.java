@@ -5,6 +5,7 @@ import org.mercury.EventService.bean.*;
 import org.mercury.EventService.criteria.SearchCriteria;
 import org.mercury.EventService.dao.*;
 import org.mercury.EventService.dto.EventCollaborationRequest;
+import org.mercury.EventService.dto.EventEditRequest;
 import org.mercury.EventService.dto.EventRequest;
 import org.mercury.EventService.filter.EventFilter;
 import org.mercury.EventService.specification.EventSpecification;
@@ -188,15 +189,13 @@ public class EventService {
         }
     }
 
-    public Event editEvent(int id, EventRequest editRequest) {
+    public Event editEvent(int id, EventEditRequest editRequest) {
         Event existingEvent = eventDao.findById(id).orElse(null);
         if (existingEvent == null) {
             throw new IllegalArgumentException("Event not found");
         }
 
-        existingEvent.setEventExpired(editRequest.isEventExpired());
-        existingEvent.setEventTitle(editRequest.getEventTitle());
-        existingEvent.setEventDescription(existingEvent.getEventDescription());
+        existingEvent.setEventDescription(editRequest.getEventDescription());
         existingEvent.setEventLastUpdatedate(new Date());
 
         if (existingEvent instanceof DocumentEvent documentEvent) {
@@ -206,8 +205,6 @@ public class EventService {
         } else if (existingEvent instanceof MeetingEvent meetingEvent) {
             meetingEvent.setMeetingLocation(editRequest.getMeetingLocation());
             meetingEvent.setMeetingVirtual(editRequest.isMeetingVirtual());
-            meetingEvent.setMeetingStarttime(editRequest.getMeetingStarttime());
-            meetingEvent.setMeetingEndtime(editRequest.getMeetingEndtime());
             meetingEvent.setMeetingNoteLink(editRequest.getMeetingNoteLink());
             meetingEvent.setMeetingAgendaLink(editRequest.getMeetingAgendaLink());
             meetingEvent.setMeetingType(editRequest.getMeetingType());
@@ -215,8 +212,6 @@ public class EventService {
         } else if (existingEvent instanceof ActivityEvent activityEvent) {
             activityEvent.setActivityVirtual(editRequest.isActivityVirtual());
             activityEvent.setActivityLocation(editRequest.getActivityLocation());
-            activityEvent.setActivityStarttime(editRequest.getActivityStarttime());
-            activityEvent.setActivityEndtime(editRequest.getActivityEndtime());
             activityEventDao.save(activityEvent);
         }
 

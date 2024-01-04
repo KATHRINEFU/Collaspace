@@ -2,10 +2,7 @@ package org.mercury.TeamService.controller;
 
 import org.mercury.TeamService.bean.Team;
 import org.mercury.TeamService.bean.Account;
-import org.mercury.TeamService.dto.InviteClientsRequest;
-import org.mercury.TeamService.dto.InviteMembersRequest;
-import org.mercury.TeamService.dto.TeamMemberDto;
-import org.mercury.TeamService.dto.TeamRequest;
+import org.mercury.TeamService.dto.*;
 import org.mercury.TeamService.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,6 +43,11 @@ public class TeamController {
     @GetMapping("/members/{id}")
     public CompletableFuture<List<TeamMemberDto>> getTeamMembers(@PathVariable int id){
         return teamService.getMembersByTeamId(id);
+    }
+
+    @GetMapping("/getCreatorandSupervisor/{id}")
+    public TeamCreatorandSupervisorResponse getTeamCreatorandSupervisor(@PathVariable int id){
+        return teamService.getTeamCreatorandSupervisorIds(id);
     }
 
     @GetMapping("/accounts/{id}")

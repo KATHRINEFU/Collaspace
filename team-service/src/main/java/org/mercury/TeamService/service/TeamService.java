@@ -342,4 +342,21 @@ public class TeamService {
 
         return accounts.stream().toList();
     }
+
+    public TeamCreatorandSupervisorResponse getTeamCreatorandSupervisorIds(int id) {
+        List<Integer> ids = new ArrayList<>();
+        Team team = teamDao.findById(id).orElse(null);
+        if(team==null) return null;
+
+        ids.add(team.getTeamCreator());
+
+        List<TeamMember> members = teamMemberDao.findAllByTeam(team);
+        members.forEach(member -> {
+            if(member.getRole().equals("supervisor")){
+                ids.add(member.getEmployeeId());
+            }
+        });
+
+        return new TeamCreatorandSupervisorResponse(ids);
+    }
 }
