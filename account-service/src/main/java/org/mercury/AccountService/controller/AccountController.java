@@ -4,9 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.ws.rs.Path;
 import org.mercury.AccountService.bean.Account;
-import org.mercury.AccountService.dto.AccountEditRequest;
-import org.mercury.AccountService.dto.AccountRequest;
-import org.mercury.AccountService.dto.AccountWithCompanyReturn;
+import org.mercury.AccountService.dto.*;
 import org.mercury.AccountService.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,12 +36,12 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
-    public  Account getAccountById(@PathVariable int id){
+    public  AccountWithFilesReturn getAccountById(@PathVariable int id){
         return accountService.getAccountById(id);
     }
 
     @GetMapping("/bydepartment/{id}")
-    public List<Account> getAccountsByDepartmentId(@PathVariable int id){
+    public List<AccountWithFilesReturn> getAccountsByDepartmentId(@PathVariable int id){
         return accountService.getByDepartmentId(id);
     }
 
@@ -86,14 +84,42 @@ public class AccountController {
         }
     }
 
-    @PutMapping("push/{id}")
-    public ResponseEntity<String> pushAccount(@PathVariable int id, @RequestBody String currentStatus) {
+    @PutMapping("/push/{id}")
+    public ResponseEntity<String> pushAccount(@PathVariable int id, @RequestBody AccountPushRequest request) {
         try {
-            Account pushedAccount = accountService.pushAccount(id, currentStatus);
+            Account pushedAccount = accountService.pushAccount(id, request);
             if (pushedAccount != null) {
                 return ResponseEntity.status(HttpStatus.CREATED).body("Account pushed successfully");
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to push account");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/updatestatus/{id}")
+    public ResponseEntity<String> updateAccountStatus(@PathVariable int id, @RequestBody AccountUpdateStatusRequest request) {
+        try {
+            Account updatedAccount = accountService.updateAccountStatus(id, request);
+            if (updatedAccount != null) {
+                return ResponseEntity.status(HttpStatus.CREATED).body("Account status updated successfully");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update account status");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/adddocuments/{id}")
+    public ResponseEntity<String> addAccountDocuments(@PathVariable int id, @RequestBody AccountAddDocumentsRequest request) {
+        try {
+            Account updatedAccount = accountService.addAccountDocuments(id, request);
+            if (updatedAccount != null) {
+                return ResponseEntity.status(HttpStatus.CREATED).body("Account documents added successfully");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to add account documents");
             }
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

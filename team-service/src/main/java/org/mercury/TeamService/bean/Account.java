@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -29,6 +30,8 @@ public class Account {
     private int CustomerSuccessPersonnel;
     private Date accountCreationdate;
     private Date accountLastUpdatedate;
+
+    private List<String> files;
 
     @Override
     public String toString() {

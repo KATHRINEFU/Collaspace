@@ -34,4 +34,10 @@ public class DocumentController {
     public List<String> getDocumentsByTicketId(@PathVariable int id){
         return documentService.getByTicketId(id);
     }
+
+    @GetMapping("/byaccount/{id}")
+    public List<String> getDocumentsByAccountId(@PathVariable int id){
+        return documentService.getByAccountId(id);
+    }
+
 }

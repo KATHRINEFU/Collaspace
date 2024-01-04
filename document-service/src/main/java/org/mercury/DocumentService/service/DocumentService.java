@@ -40,6 +40,11 @@ public class DocumentService {
             newDoc.setDocumentLink(request.getDocumentLink());
             newDoc.setDocumentFromType(request.getDocumentFromType());
             newDoc.setDocumentUploaddate(new Date());
+            if(request.getDocumentFromType().equals("ticket")){
+                newDoc.setTicketId(request.getDocumentFromId());
+            }else if(request.getDocumentFromType().equals("account")){
+                newDoc.setAccountId(request.getDocumentFromId());
+            }
             documentDao.save(newDoc);
         });
 
@@ -47,6 +52,15 @@ public class DocumentService {
 
     public List<String> getByTicketId(int id) {
         List<Document> documents = documentDao.findAllByTicketId(id);
+        List<String> files = new ArrayList<>();
+        documents.forEach(document -> {
+            files.add(document.getDocumentLink());
+        });
+        return files;
+    }
+
+    public List<String> getByAccountId(int id){
+        List<Document> documents = documentDao.findAllByAccountId(id);
         List<String> files = new ArrayList<>();
         documents.forEach(document -> {
             files.add(document.getDocumentLink());

@@ -38,5 +38,8 @@ public class Document {
     private int ticketId;
 
     @Column
+    private int accountId;
+
+    @Column
     private Date documentUploaddate;
 }

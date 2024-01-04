@@ -3,6 +3,7 @@ package org.mercury.DocumentService.dao;
 import org.mercury.DocumentService.bean.Document;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.print.Doc;
 import java.util.List;
 
 /**
@@ -16,4 +17,6 @@ import java.util.List;
 
 public interface DocumentDao  extends JpaRepository<Document, Integer> {
     List<Document> findAllByTicketId(int id);
+
+    List<Document> findAllByAccountId(int id);
 }

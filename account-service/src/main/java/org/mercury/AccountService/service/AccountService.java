@@ -5,18 +5,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.mercury.AccountService.bean.Account;
 import org.mercury.AccountService.bean.Company;
 import org.mercury.AccountService.dao.AccountDao;
-import org.mercury.AccountService.dto.AccountEditRequest;
-import org.mercury.AccountService.dto.AccountGetCompanyRequest;
-import org.mercury.AccountService.dto.AccountRequest;
-import org.mercury.AccountService.dto.AccountWithCompanyReturn;
+import org.mercury.AccountService.dto.*;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -39,15 +40,44 @@ public class AccountService {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    private final WebClient webClient;
+
     private CompletableFuture<Company> companyFuture;
 
+    public AccountService(){
+        this.webClient = WebClient.create("http://localhost:8080/document");
+    }
 
     public List<Account> getAll() {
         return accountDao.findAll();
     }
 
-    public Account getAccountById(int id) {
-        return accountDao.findById(id).orElse(null);
+    public AccountWithFilesReturn getAccountById(int id) {
+        Account account =  accountDao.findById(id).orElse(null);
+        if(account==null) return null;
+        AccountWithFilesReturn accountWithFiles = new AccountWithFilesReturn();
+        accountWithFiles.setAccountId(account.getAccountId());
+        accountWithFiles.setAccountType(account.getAccountType());
+        accountWithFiles.setCompanyId(account.getCompanyId());
+        accountWithFiles.setAccountCurrentStatus(account.getAccountCurrentStatus());
+        accountWithFiles.setAccountCurrentResponsibleDepartmentId(account.getAccountCurrentResponsibleDepartmentId());
+        accountWithFiles.setBiddingPersonnel(account.getBiddingPersonnel());
+        accountWithFiles.setSalesPersonnel(account.getSalesPersonnel());
+        accountWithFiles.setCustomerSuccessPersonnel(account.getCustomerSuccessPersonnel());
+        accountWithFiles.setSolutionArchitectPersonnel(account.getSolutionArchitectPersonnel());
+        accountWithFiles.setAccountCreationdate(account.getAccountCreationdate());
+        accountWithFiles.setAccountLastUpdatedate(account.getAccountLastUpdatedate());
+
+        ResponseEntity<List<String>> response = webClient.get()
+                .uri("/byaccount/{id}",account.getAccountId())
+                .retrieve()
+                .toEntity(new ParameterizedTypeReference<List<String>>() {})
+                .block(); // This makes the call synchronous
+        if(response!=null){
+            accountWithFiles.setFiles(response.getBody());
+        }
+
+        return accountWithFiles;
     }
 
     @RabbitListener(queues = {"q.return-account-company"})
@@ -130,21 +160,46 @@ public class AccountService {
         return accountDao.save(accountFromDB);
     }
 
-    public Account pushAccount(int id, String currentStatus) {
-        Optional<Account> optionalAccount = accountDao.findById(id);
-        if(optionalAccount.isEmpty()) return null;
-        Account accountFromDB = optionalAccount.get();
+    public Account pushAccount(int id, AccountPushRequest request) {
+        Account account = accountDao.findById(id).orElse(null);
+        if(account==null) return null;
 
-        accountFromDB.setAccountCurrentResponsibleDepartmentId(accountFromDB.getAccountCurrentResponsibleDepartmentId() + 1);
-        if(!currentStatus.isEmpty()){
-            accountFromDB.setAccountCurrentStatus(currentStatus);
-        }
-        accountFromDB.setAccountLastUpdatedate(new Date());
+        account.setAccountCurrentResponsibleDepartmentId(request.getCurDepartmentId() + 1);
+        account.setAccountLastUpdatedate(new Date());
 
-        return accountDao.save(accountFromDB);
+        return accountDao.save(account);
     }
 
-    public List<Account> getByDepartmentId(int departmentId) {
-        return accountDao.findByAccountCurrentResponsibleDepartmentId(departmentId);
+    public List<AccountWithFilesReturn> getByDepartmentId(int departmentId) {
+        List<Account> accounts =  accountDao.findByAccountCurrentResponsibleDepartmentId(departmentId);
+        List<AccountWithFilesReturn> accountsWithFiles = new ArrayList<>();
+        accounts.forEach(account -> {
+            accountsWithFiles.add(getAccountById(account.getAccountId()));
+        });
+
+        return accountsWithFiles;
+    }
+
+    public Account updateAccountStatus(int id, AccountUpdateStatusRequest request) {
+        Account account = accountDao.findById(id).orElse(null);
+        if(account==null) return null;
+        account.setAccountCurrentStatus(request.getStatus());
+        return accountDao.save(account);
+    }
+
+    public Account addAccountDocuments(int id, AccountAddDocumentsRequest request) {
+        Account account = accountDao.findById(id).orElse(null);
+        if(account==null) return null;
+
+        if(request.getFiles()!=null && !request.getFiles().isEmpty()){
+            List<DocumentCreationRequest> documentRequests = new ArrayList<>();
+            request.getFiles().forEach(file -> {
+                DocumentCreationRequest documentRequest = new DocumentCreationRequest(file, "account", account.getAccountId());
+                documentRequests.add(documentRequest);
+            });
+            rabbitTemplate.convertAndSend("", "q.create-document", documentRequests);
+        }
+
+        return account;
     }
 }

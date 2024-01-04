@@ -21,4 +21,5 @@ import java.util.Date;
 public class DocumentCreationRequest {
     private String documentLink;
     private String documentFromType;
+    private int documentFromId;
 }

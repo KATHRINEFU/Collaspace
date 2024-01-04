@@ -144,7 +144,7 @@ public class TicketService {
         if(request.getFiles()!=null && request.getFiles().size()>0){
             List<DocumentCreationRequest> documentRequests = new ArrayList<>();
             request.getFiles().forEach(file -> {
-                DocumentCreationRequest documentRequest = new DocumentCreationRequest(file, "ticket");
+                DocumentCreationRequest documentRequest = new DocumentCreationRequest(file, "ticket", ticket.getTicketId());
                 documentRequests.add(documentRequest);
             });
             rabbitTemplate.convertAndSend("", "q.create-document", documentRequests);

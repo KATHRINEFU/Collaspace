@@ -1,4 +1,4 @@
-package org.mercury.TicketService.dto;
+package org.mercury.AccountService.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
